@@ -42,22 +42,56 @@ class UserController extends ActionController
     {
         $this->getLogger()->debug("Called controller action " . __METHOD__);
 
-        $password = "very_secure";
+        $password = $this->generateRandomPassword();
         $feUser->setPassword($saltedPw = $this->getSaltedPassword($password));
 
         $this->userRepository->add($feUser);
         $this->getLogger()->info("Added user $feUser with password $password ($saltedPw) to database.");
+
+        $link = $this->uriBuilder->uriFor(
+            'allowUser',
+            [
+                'email' => $feUser->getEmail(),
+                'password' => $password,
+            ]
+        );
+
+        $this->getLogger()->debug("Generated link: $link");
     }
 
-    public function allowUser()
+    public function allowUserAction()
     {
         $arguments = $this->request->getArguments();
-        if (!array_key_exists('email', $arguments) || !array_key_exists('saltedPassword', $arguments)) {
-            throw new \Exception("Arguments 'email' and 'saltedPassword' are required.");
+        if (!array_key_exists('email', $arguments) || !array_key_exists('password', $arguments)) {
+            throw new \Exception("Arguments 'email' and 'password' are required.");
         }
 
         $feUser = $this->userRepository->findByEmail($arguments['email']);
-        $this->view->assign('feUser', $feUser);
+        $this->view->assign('feUser', clone $feUser);
+        $password = $this->generateRandomPassword();
+        $feUser->setPassword($saltedPw = $this->getSaltedPassword($password));
+
+        $this->userRepository->update($feUser);
+
+        $link = $this->uriBuilder->uriFor(
+            'activateUser',
+            [
+                'email' => $feUser->getEmail(),
+                'password' => $password,
+            ]
+        );
+
+        $this->getLogger()->debug("Generated link: $link");
+    }
+
+    public function activateUserAction()
+    {
+        //
+    }
+
+    private function generateRandomPassword() : string
+    {
+        return 'very_secure';
     }
 
     /**

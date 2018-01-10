@@ -12,9 +12,9 @@ if(!defined('TYPO3_MODE')){
     'AlexGunkel.' . $_EXTKEY,
     'fe_useradd',
     [
-        'User' => 'addUser, submitUser',
+        'User' => 'addUser, submitUser, allowUser, activateUser',
     ],
     [
-        'User' => 'addUser, submitUser',
+        'User' => 'addUser, submitUser, allowUser, activateUser',
     ]
 );
