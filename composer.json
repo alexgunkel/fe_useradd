@@ -1,0 +1,16 @@
+{
+    "name": "alexgunkel/fe-useradd",
+    "description": "TYPO3-Extension that allows fe_user-registration via form",
+    "type": "typo3-cms-extension",
+    "authors": [
+        {
+            "name": "Alexander Gunkel",
+            "email": "alexandergunkel@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "AlexGunkel\\FeUseradd\\": "Classes/"
+        }
+    }
+}
