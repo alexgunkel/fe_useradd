@@ -16,32 +16,40 @@ final class User extends AbstractDomainObject
     /**
      * @var string
      */
-    private $firstName;
+    protected $firstName;
 
     /**
      * @var string
      */
-    private $lastName;
+    protected $lastName;
 
     /**
      * @var string
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
      */
-    private $company;
+    protected $company;
 
     /**
      * @var string
      */
-    private $position;
+    protected $position;
 
     /**
      * @var string
      */
-    private $password;
+    protected $password;
+
+    /**
+     * @return string
+     */
+    final public function __toString() : string
+    {
+        return "$this->firstName $this->lastName ($this->email, $this->position bei $this->company)";
+    }
 
     /**
      * @return string

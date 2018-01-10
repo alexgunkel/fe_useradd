@@ -1,0 +1,41 @@
+<div xmlns="http://www.w3.org/1999/xhtml" lang="en"
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
+    <h2>New Frontend User</h2>
+
+    <f:form action="submitUser" controller="User" object="{feUser}" name="feUser">
+        <table>
+            <tr>
+                <td>first name:</td>
+                <td>
+                    <f:form.textfield property="firstName" size="30"></f:form.textfield>
+                </td>
+            </tr>
+            <tr>
+                <td>last name:</td>
+                <td>
+                    <f:form.textfield property="lastName" size="30" ></f:form.textfield>
+                </td>
+            </tr>
+            <tr>
+                <td>e-mail:</td>
+                <td>
+                    <f:form.textfield property="email" size="30" ></f:form.textfield>
+                </td>
+            </tr>
+            <tr>
+                <td>company:</td>
+                <td>
+                    <f:form.textfield property="company" size="30" ></f:form.textfield>
+                </td>
+            </tr>
+            <tr>
+                <td>position:</td>
+                <td>
+                    <f:form.textfield property="position" size="30" ></f:form.textfield>
+                </td>
+            </tr>
+        </table>
+
+        <f:form.button>Create</f:form.button>
+    </f:form>
+</div>
