@@ -14,6 +14,7 @@ use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
 
 class UserController extends ActionController
 {
@@ -42,10 +43,31 @@ class UserController extends ActionController
         $this->getLogger()->debug("Called controller action " . __METHOD__);
 
         $password = "very_secure";
-        $feUser->setPassword($password);
+        $feUser->setPassword($saltedPw = $this->getSaltedPassword($password));
 
         $this->userRepository->add($feUser);
-        $this->getLogger()->info("Added user $feUser with password $password to database.");
+        $this->getLogger()->info("Added user $feUser with password $password ($saltedPw) to database.");
+    }
+
+    public function allowUser()
+    {
+        $arguments = $this->request->getArguments();
+        if (!array_key_exists('email', $arguments) || !array_key_exists('saltedPassword', $arguments)) {
+            throw new \Exception("Arguments 'email' and 'saltedPassword' are required.");
+        }
+
+        $feUser = $this->userRepository->findByEmail($arguments['email']);
+        $this->view->assign('feUser', $feUser);
+    }
+
+    /**
+     * @param string $password
+     * @return string
+     */
+    private function getSaltedPassword(string $password) : string
+    {
+        $salting = SaltFactory::getSaltingInstance(null, 'FE');
+        return $salting->getHashedPassword($password);
     }
 
     /**

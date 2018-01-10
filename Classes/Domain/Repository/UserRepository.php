@@ -8,9 +8,23 @@
 
 namespace AlexGunkel\FeUseradd\Domain\Repository;
 
+use AlexGunkel\FeUseradd\Domain\Model\User;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
 class UserRepository extends Repository
 {
+    final public function findByEmail(string $email) : User
+    {
+        $query = $this->createQuery();
+        $query->matching($query->equals('email', $email, false));
+        /** @var QueryResultInterface $result */
+        $result = $query->execute(false);
 
+        if ($result->count() !== 1) {
+            throw new \Exception("Given email-address is unknown or not unique.");
+        }
+
+        return $result->getFirst();
+    }
 }
