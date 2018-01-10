@@ -27,6 +27,6 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'AlexGunkel.' . $_EXTKEY,
-    'register_user',
+    'fe_useradd',
     'Register User'
 );
