@@ -8,6 +8,7 @@
 
 namespace AlexGunkel\FeUseradd\Controller;
 
+use AlexGunkel\FeUseradd\Domain\Model\PasswordInput;
 use AlexGunkel\FeUseradd\Domain\Model\User;
 use AlexGunkel\FeUseradd\Domain\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
@@ -61,12 +62,7 @@ class UserController extends ActionController
 
     public function allowUserAction()
     {
-        $arguments = $this->request->getArguments();
-        if (!array_key_exists('email', $arguments) || !array_key_exists('password', $arguments)) {
-            throw new \Exception("Arguments 'email' and 'password' are required.");
-        }
-
-        $feUser = $this->userRepository->findByEmail($arguments['email']);
+        $feUser = $this->getFeUserFromRequest();
         $this->view->assign('feUser', clone $feUser);
         $password = $this->generateRandomPassword();
         $feUser->setPassword($saltedPw = $this->getSaltedPassword($password));
@@ -86,7 +82,22 @@ class UserController extends ActionController
 
     public function activateUserAction()
     {
-        //
+        $feUser = $this->getFeUserFromRequest();
+        $this->view->assign('feUser', clone $feUser);
+        $this->view->assign('password', $this->request->getArgument('password'));
+        $this->view->assign('email', $this->request->getArgument('email'));
+    }
+
+    /**
+     * @param PasswordInput $passwordInput
+     * @param string $email
+     */
+    public function setPasswordAction(PasswordInput $passwordInput)
+    {
+        $passwordInput->check();
+        $feUser = $this->userRepository->findByEmail($passwordInput->getEmail());
+        $this->getLogger()->debug("set Password for $feUser: $passwordInput");
+        $feUser->setPassword($passwordInput);
     }
 
     private function generateRandomPassword() : string
@@ -116,5 +127,20 @@ class UserController extends ActionController
         /** @var LogManager $logManager */
         $logManager = GeneralUtility::makeInstance(LogManager::class);
         return $this->logger = $logManager->getLogger(__CLASS__);
+    }
+
+    /**
+     * @return User
+     * @throws \Exception
+     */
+    private function getFeUserFromRequest(): User
+    {
+        $arguments = $this->request->getArguments();
+        if (!array_key_exists('email', $arguments) || !array_key_exists('password', $arguments)) {
+            throw new \Exception("Arguments 'email' and 'password' are required.");
+        }
+
+        $feUser = $this->userRepository->findByEmail($arguments['email']);
+        return $feUser;
     }
 }

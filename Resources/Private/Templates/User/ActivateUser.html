@@ -1,22 +1,24 @@
 <div xmlns="http://www.w3.org/1999/xhtml" lang="en"
      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
-    <h2>New Frontend User</h2>
+    <h2>Set password:</h2>
 
-    <f:form action="setPassword" controller="User" name="passwordInput">
+    <f:form action="setPassword" controller="User" object="{passwordInput}" name="passwordInput">
         <table>
             <tr>
-                <td>first name:</td>
+                <td>Password:</td>
                 <td>
                     <f:form.password property="inputOne" size="30"></f:form.password>
                 </td>
             </tr>
             <tr>
-                <td>last name:</td>
+                <td>repeat password:</td>
                 <td>
                     <f:form.password property="inputTwo" size="30" ></f:form.password>
                 </td>
             </tr>
         </table>
+        <f:form.hidden property="oldPassword" value="{passwordInput}" />
+        <f:form.hidden property="email" value="{email}" />
 
         <f:form.button>Set password</f:form.button>
     </f:form>

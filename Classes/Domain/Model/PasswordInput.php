@@ -11,11 +11,28 @@ namespace AlexGunkel\FeUseradd\Domain\Model;
 
 class PasswordInput
 {
-    private $inputOne;
-    private $inputTwo;
+    /**
+     * @var string
+     */
+    private $email;
 
     /**
-     * @param mixed $inputOne
+     * @var string
+     */
+    private $oldPassword = '';
+
+    /**
+     * @var string
+     */
+    private $inputOne = '';
+
+    /**
+     * @var string
+     */
+    private $inputTwo = '';
+
+    /**
+     * @param string $inputOne
      */
     public function setInputOne(string $inputOne)
     {
@@ -23,7 +40,7 @@ class PasswordInput
     }
 
     /**
-     * @param mixed $inputTwo
+     * @param string $inputTwo
      */
     public function setInputTwo(string $inputTwo)
     {
@@ -32,14 +49,56 @@ class PasswordInput
 
     final public function __toString()
     {
-        $this->check();
+        try {
+            $this->check();
+        } catch (\Exception $exception) {
+            return '';
+        }
         return $this->inputOne;
     }
 
-    private function check()
+    final public function check() : self
     {
         if ($this->inputOne !== $this->inputTwo) {
             throw new \Exception("Strings are different.");
         }
+
+        if (empty($this->inputOne)) {
+            throw new \Exception("Password is not allowed to be empty.");
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOldPassword() : string
+    {
+        return $this->oldPassword;
+    }
+
+    /**
+     * @param string $oldPassword
+     */
+    public function setOldPassword(string $oldPassword)
+    {
+        $this->oldPassword = $oldPassword;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     */
+    public function setEmail(string $email)
+    {
+        $this->email = $email;
     }
 }
