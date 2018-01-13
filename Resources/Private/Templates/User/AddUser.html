@@ -1,41 +1,43 @@
 <div xmlns="http://www.w3.org/1999/xhtml" lang="en"
-     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
-    <h2>New Frontend User</h2>
+     xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers"
+     data-namespace-typo3-fluid="true">
 
+<f:layout name="Default" />
+
+<!--
+	=====================
+		User/AddUser.html
+-->
+
+<f:section name="Main">
+    <f:if condition="{f:translate(key: 'heading', extensionName: 'fe_useradd')}">
+        <h2>{f:translate(key: 'heading', extensionName: 'fe_useradd')}</h2>
+    </f:if>
     <f:form action="submitUser" controller="User" object="{feUser}" name="feUser">
-        <table>
-            <tr>
-                <td>first name:</td>
-                <td>
-                    <f:form.textfield property="firstName" size="30"></f:form.textfield>
-                </td>
-            </tr>
-            <tr>
-                <td>last name:</td>
-                <td>
-                    <f:form.textfield property="lastName" size="30" ></f:form.textfield>
-                </td>
-            </tr>
-            <tr>
-                <td>e-mail:</td>
-                <td>
-                    <f:form.textfield property="email" size="30" ></f:form.textfield>
-                </td>
-            </tr>
-            <tr>
-                <td>company:</td>
-                <td>
-                    <f:form.textfield property="company" size="30" ></f:form.textfield>
-                </td>
-            </tr>
-            <tr>
-                <td>position:</td>
-                <td>
-                    <f:form.textfield property="position" size="30" ></f:form.textfield>
-                </td>
-            </tr>
-        </table>
-
-        <f:form.button>Create</f:form.button>
+        <f:if condition="{f:translate(key: 'description', extensionName: 'fe_useradd')}">
+            <legend>{f:translate(key: 'description', extensionName: 'fe_useradd')}</legend>
+        </f:if>
+        <div class="form-group">
+            <label for="firstName">{f:translate(key: 'label.first-name', extensionName: 'fe_useradd')}</label>
+            <f:form.textfield id="firstName" property="firstName" size="30"/>
+        </div>
+        <div class="form-group">
+            <label for="firstName">{f:translate(key: 'label.last-name', extensionName: 'fe_useradd')}</label>
+            <f:form.textfield id="lastName" property="lastName" size="30" />
+        </div>
+        <div class="form-group">
+            <label for="email">{f:translate(key: 'label.email', extensionName: 'fe_useradd')}</label>
+            <f:form.textfield id="email" type="email" property="lastName" size="30" />
+        </div>
+        <div class="form-group">
+            <label for="company">{f:translate(key: 'label.company', extensionName: 'fe_useradd')}</label>
+            <f:form.textfield id="company" property="company" size="30" />
+        </div>
+        <div class="form-group">
+            <label for="position">{f:translate(key: 'label.position', extensionName: 'fe_useradd')}</label>
+            <f:form.textfield id="position" property="position" size="30" />
+        </div>
+        <f:form.button class="btn btn-default">{f:translate(key: 'label.submit', extensionName: 'fe_useradd')}</f:form.button>
     </f:form>
+</f:section>
 </div>

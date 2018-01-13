@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" product-name="fe_useradd" date="2018-01-12T21:12:04+00:00">
+		<header/>
+		<body>
+			<trans-unit id="heading">
+				<target>Heading</target>
+			</trans-unit>
+			<trans-unit id="description">
+				<target>Description</target>
+			</trans-unit>
+			<trans-unit id="label.first-name">
+				<target>First Name</target>
+			</trans-unit>
+			<trans-unit id="label.last-name">
+				<target>Last Name:</target>
+			</trans-unit>
+			<trans-unit id="label.email">
+				<target>E-Mail:</target>
+			</trans-unit>
+			<trans-unit id="label.company">
+				<target>Company:</target>
+			</trans-unit>
+			<trans-unit id="label.submit">
+				<target>Create User</target>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
