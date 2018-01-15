@@ -30,3 +30,9 @@ if (!defined('TYPO3_MODE')) {
     'fe_useradd',
     'Register User'
 );
+
+$TCA['tt_content']['types']['list']['subtypes_addlist']['feuseradd_fe_useradd'] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    'feuseradd_fe_useradd',
+    'FILE:EXT:fe_useradd/Configuration/FlexForms/fe_useradd_fe_useradd.xml'
+);

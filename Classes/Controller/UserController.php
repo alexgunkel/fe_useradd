@@ -10,6 +10,7 @@ namespace AlexGunkel\FeUseradd\Controller;
 
 use AlexGunkel\FeUseradd\Domain\Model\PasswordInput;
 use AlexGunkel\FeUseradd\Domain\Model\User;
+use AlexGunkel\FeUseradd\Domain\Model\ValidationMail;
 use AlexGunkel\FeUseradd\Exception\FeUseraddException;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Log\LogManager;
@@ -45,6 +46,13 @@ class UserController extends ActionController
     private $userService;
 
     /**
+     * @var \AlexGunkel\FeUseradd\Service\MailService
+     *
+     * @inject
+     */
+    private $mailService;
+
+    /**
      * @param User $feUser
      */
     public function addUserAction(User $feUser = null)
@@ -71,7 +79,11 @@ class UserController extends ActionController
             ]
         );
 
-        $this->getLogger()->debug("Generated link: $link");
+        $sendTo = $this->settings['receiver'];
+        $mail = new ValidationMail($link, $feUser);
+        $this->mailService->sendMailTo($mail, $sendTo);
+
+        $this->getLogger()->debug("Generated link: $link and send it to $sendTo");
     }
 
     public function allowUserAction()
@@ -96,7 +108,9 @@ class UserController extends ActionController
                 ]
             );
 
-            $this->getLogger()->debug("Generated link: $link");
+            $this->getLogger()->debug("Generated link: $link and send it to " . $feUser->getEmail());
+            $mail = new ValidationMail($link, $feUser);
+            $this->mailService->sendMailTo($mail, $feUser->getEmail());
         } catch (FeUseraddException $exception) {
             $this->getLogger()->error("Error: " . $exception->getMessage() . ". Trace: " . $exception->getTraceAsString());
         }
