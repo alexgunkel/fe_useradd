@@ -43,6 +43,12 @@ final class User extends AbstractDomainObject
      */
     protected $password;
 
+    final public function __clone()
+    {
+        parent::__clone();
+        $this->password = '';
+    }
+
     /**
      * @return string
      */
@@ -62,7 +68,7 @@ final class User extends AbstractDomainObject
     /**
      * @param string $firstName
      */
-    final public function setFirstName($firstName)
+    final public function setFirstName(string $firstName)
     {
         $this->firstName = $firstName;
     }
@@ -78,7 +84,7 @@ final class User extends AbstractDomainObject
     /**
      * @param string $lastName
      */
-    final public function setLastName($lastName)
+    final public function setLastName(string $lastName)
     {
         $this->lastName = $lastName;
     }
@@ -94,7 +100,7 @@ final class User extends AbstractDomainObject
     /**
      * @param string $email
      */
-    final public function setEmail($email)
+    final public function setEmail(string $email)
     {
         $this->email = $email;
     }
@@ -110,7 +116,7 @@ final class User extends AbstractDomainObject
     /**
      * @param string $company
      */
-    final public function setCompany($company)
+    final public function setCompany(string $company)
     {
         $this->company = $company;
     }
@@ -126,7 +132,7 @@ final class User extends AbstractDomainObject
     /**
      * @param string $position
      */
-    final public function setPosition($position)
+    final public function setPosition(string $position)
     {
         $this->position = $position;
     }
@@ -142,7 +148,7 @@ final class User extends AbstractDomainObject
     /**
      * @param string $password
      */
-    final public function setPassword($password)
+    final public function setPassword(string $password)
     {
         $this->password = $password;
     }

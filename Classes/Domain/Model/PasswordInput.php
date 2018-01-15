@@ -9,6 +9,8 @@
 namespace AlexGunkel\FeUseradd\Domain\Model;
 
 
+use AlexGunkel\FeUseradd\Domain\Value\Password;
+
 class PasswordInput
 {
     /**
@@ -63,19 +65,20 @@ class PasswordInput
             throw new \Exception("Strings are different.");
         }
 
-        if (empty($this->inputOne)) {
-            throw new \Exception("Password is not allowed to be empty.");
+        $length = strlen($this->inputOne);
+        if ($length < 5 || $length > 12) {
+            throw new \Exception("Password must have between 5 and 12 characters.");
         }
 
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getOldPassword() : string
+    public function getLoginData(): LoginData
     {
-        return $this->oldPassword;
+        return new LoginData(
+            $this->email,
+            new Password($this->oldPassword)
+        );
     }
 
     /**
@@ -84,14 +87,6 @@ class PasswordInput
     public function setOldPassword(string $oldPassword)
     {
         $this->oldPassword = $oldPassword;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): string
-    {
-        return $this->email;
     }
 
     /**

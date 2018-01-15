@@ -10,12 +10,11 @@ namespace AlexGunkel\FeUseradd\Controller;
 
 use AlexGunkel\FeUseradd\Domain\Model\PasswordInput;
 use AlexGunkel\FeUseradd\Domain\Model\User;
-use AlexGunkel\FeUseradd\Domain\Repository\UserRepository;
+use AlexGunkel\FeUseradd\Exception\FeUseraddException;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
 
 class UserController extends ActionController
 {
@@ -32,6 +31,20 @@ class UserController extends ActionController
     private $userRepository;
 
     /**
+     * @var \AlexGunkel\FeUseradd\Service\PasswordService
+     *
+     * @inject
+     */
+    private $passwordService;
+
+    /**
+     * @var \AlexGunkel\FeUseradd\Service\UserService
+     *
+     * @inject
+     */
+    private $userService;
+
+    /**
      * @param User $feUser
      */
     public function addUserAction(User $feUser = null)
@@ -43,8 +56,9 @@ class UserController extends ActionController
     {
         $this->getLogger()->debug("Called controller action " . __METHOD__);
 
-        $password = $this->generateRandomPassword();
-        $feUser->setPassword($saltedPw = $this->getSaltedPassword($password));
+        $password = $this->passwordService->generateRandomPassword();
+        $saltedPw = $this->passwordService->getSaltedPassword($password);
+        $feUser->setPassword($saltedPw);
 
         $this->userRepository->add($feUser);
         $this->getLogger()->info("Added user $feUser with password $password ($saltedPw) to database.");
@@ -62,61 +76,72 @@ class UserController extends ActionController
 
     public function allowUserAction()
     {
-        $feUser = $this->getFeUserFromRequest();
-        $this->view->assign('feUser', clone $feUser);
-        $password = $this->generateRandomPassword();
-        $feUser->setPassword($saltedPw = $this->getSaltedPassword($password));
+        try {
+            $feUser = $this->userService->getValidatedFeUser(
+                $this->userRepository,
+                $this->userService->getLoginDataFromRequest($this->request)
+            );
+            $this->view->assign('feUser', clone $feUser);
+            $password = $this->passwordService->generateRandomPassword();
+            $feUser->setPassword($saltedPw = $this->passwordService->getSaltedPassword($password));
 
-        $this->userRepository->update($feUser);
+            $this->userRepository->update($feUser);
+            $this->getLogger()->info("Added user $feUser with password $password ($saltedPw) to database.");
 
-        $link = $this->uriBuilder->uriFor(
-            'activateUser',
-            [
-                'email' => $feUser->getEmail(),
-                'password' => $password,
-            ]
-        );
+            $link = $this->uriBuilder->uriFor(
+                'activateUser',
+                [
+                    'email' => $feUser->getEmail(),
+                    'password' => $password,
+                ]
+            );
 
-        $this->getLogger()->debug("Generated link: $link");
+            $this->getLogger()->debug("Generated link: $link");
+        } catch (FeUseraddException $exception) {
+            $this->getLogger()->error("Error: " . $exception->getMessage() . ". Trace: " . $exception->getTraceAsString());
+        }
     }
 
     public function activateUserAction()
     {
-        $feUser = $this->getFeUserFromRequest();
-        $this->view->assign('feUser', clone $feUser);
-        $this->view->assign('password', $this->request->getArgument('password'));
-        $this->view->assign('email', $this->request->getArgument('email'));
+        try {
+            $feUser = $this->userService->getValidatedFeUser(
+                $this->userRepository,
+                $this->userService->getLoginDataFromRequest($this->request)
+            );
+            $this->view->assign('feUser', clone $feUser);
+            $this->view->assign('password', $this->request->getArgument('password'));
+            $this->view->assign('email', $this->request->getArgument('email'));
+        } catch (FeUseraddException $exception) {
+            $this->getLogger()->error("Error: " . $exception->getMessage() . ". Trace: " . $exception->getTraceAsString());
+        }
     }
 
     /**
      * @param PasswordInput $passwordInput
-     * @param string $email
+     *
+     * @return void
      */
     public function setPasswordAction(PasswordInput $passwordInput)
     {
-        $passwordInput->check();
-        $feUser = $this->userRepository->findByEmail($passwordInput->getEmail());
-        $this->getLogger()->debug("set Password for $feUser: $passwordInput");
-        $feUser->setPassword($passwordInput);
-    }
+        try {
+            $passwordInput->check();
+            $feUser = $this->userService->getValidatedFeUser(
+                $this->userRepository,
+                $passwordInput->getLoginData()
+            );
+            $saltedPw = $this->passwordService->getSaltedPassword($passwordInput);
+            $feUser->setPassword($saltedPw);
+            $this->getLogger()->debug("set Password for $feUser: $passwordInput ($saltedPw)");
 
-    private function generateRandomPassword() : string
-    {
-        return 'very_secure';
-    }
-
-    /**
-     * @param string $password
-     * @return string
-     */
-    private function getSaltedPassword(string $password) : string
-    {
-        $salting = SaltFactory::getSaltingInstance(null, 'FE');
-        return $salting->getHashedPassword($password);
+            $this->userRepository->update($feUser);
+        } catch (FeUseraddException $exception) {
+            $this->getLogger()->error("Error: " . $exception->getMessage() . ". Trace: " . $exception->getTraceAsString());
+        }
     }
 
     /**
-     * @return \TYPO3\CMS\Core\Log\Logger
+     * @return LoggerInterface
      */
     private function getLogger() : LoggerInterface
     {
@@ -127,20 +152,5 @@ class UserController extends ActionController
         /** @var LogManager $logManager */
         $logManager = GeneralUtility::makeInstance(LogManager::class);
         return $this->logger = $logManager->getLogger(__CLASS__);
-    }
-
-    /**
-     * @return User
-     * @throws \Exception
-     */
-    private function getFeUserFromRequest(): User
-    {
-        $arguments = $this->request->getArguments();
-        if (!array_key_exists('email', $arguments) || !array_key_exists('password', $arguments)) {
-            throw new \Exception("Arguments 'email' and 'password' are required.");
-        }
-
-        $feUser = $this->userRepository->findByEmail($arguments['email']);
-        return $feUser;
     }
 }

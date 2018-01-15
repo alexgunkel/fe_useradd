@@ -1,7 +1,7 @@
 <div xmlns="http://www.w3.org/1999/xhtml" lang="en"
      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
     <h2>Set password:</h2>
-
+    <f:debug>{_all}</f:debug>
     <f:form action="setPassword" controller="User" object="{passwordInput}" name="passwordInput">
         <table>
             <tr>
@@ -17,7 +17,7 @@
                 </td>
             </tr>
         </table>
-        <f:form.hidden property="oldPassword" value="{passwordInput}" />
+        <f:form.hidden property="oldPassword" value="{password}" />
         <f:form.hidden property="email" value="{email}" />
 
         <f:form.button>Set password</f:form.button>

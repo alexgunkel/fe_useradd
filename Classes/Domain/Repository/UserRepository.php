@@ -9,6 +9,7 @@
 namespace AlexGunkel\FeUseradd\Domain\Repository;
 
 use AlexGunkel\FeUseradd\Domain\Model\User;
+use AlexGunkel\FeUseradd\Exception\ValidationException;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -21,8 +22,10 @@ class UserRepository extends Repository
         /** @var QueryResultInterface $result */
         $result = $query->execute(false);
 
-        if ($result->count() !== 1) {
-            throw new \Exception("Given email-address is unknown or not unique.");
+        if ($result->count() === 0) {
+            throw new ValidationException("Given email-address is unknown.");
+        } elseif ($result->count() > 1) {
+            throw new ValidationException('Given email-address is not unique.');
         }
 
         return $result->getFirst();
