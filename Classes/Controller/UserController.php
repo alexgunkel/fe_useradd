@@ -76,7 +76,8 @@ class UserController extends ActionController
         $this->userRepository->add($feUser);
         $this->getLogger()->info("Added user $feUser with password $password ($saltedPw) to database.");
 
-        $link = $this->uriBuilder->uriFor(
+        $link = $this->uriBuilder->setCreateAbsoluteUri(true)
+            ->uriFor(
             'allowUser',
             [
                 'email' => $feUser->getEmail(),
@@ -105,7 +106,8 @@ class UserController extends ActionController
             $this->userRepository->update($feUser);
             $this->getLogger()->info("Added user $feUser with password $password ($saltedPw) to database.");
 
-            $link = $this->uriBuilder->uriFor(
+            $link = $this->uriBuilder->setCreateAbsoluteUri(true)
+                ->uriFor(
                 'activateUser',
                 [
                     'email' => $feUser->getEmail(),

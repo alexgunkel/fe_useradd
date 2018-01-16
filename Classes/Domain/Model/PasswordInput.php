@@ -25,13 +25,15 @@ class PasswordInput
 
     /**
      * @var string
+     * @validate StringLength(minimum=5, maximum=20)
      */
-    private $inputOne = '';
+    protected $inputOne = '';
 
     /**
      * @var string
+     * @validate StringLength(minimum=5, maximum=20)
      */
-    private $inputTwo = '';
+    protected $inputTwo = '';
 
     /**
      * @param string $inputOne
@@ -63,11 +65,6 @@ class PasswordInput
     {
         if ($this->inputOne !== $this->inputTwo) {
             throw new \Exception("Strings are different.");
-        }
-
-        $length = strlen($this->inputOne);
-        if ($length < 5 || $length > 12) {
-            throw new \Exception("Password must have between 5 and 12 characters.");
         }
 
         return $this;
