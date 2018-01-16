@@ -15,26 +15,32 @@ final class User extends AbstractDomainObject
 {
     /**
      * @var string
+     * @validate StringLength(minimum=3, maximum=30)
      */
     protected $firstName;
 
     /**
      * @var string
+     * @validate StringLength(minimum=3, maximum=30)
      */
     protected $lastName;
 
     /**
      * @var string
+     * @validate NotEmpty
+     * @validate EmailAddress
      */
     protected $email;
 
     /**
      * @var string
+     * @validate StringLength(minimum=3, maximum=30)
      */
     protected $company;
 
     /**
      * @var string
+     * @validate StringLength(minimum=3, maximum=30)
      */
     protected $position;
 
@@ -67,6 +73,7 @@ final class User extends AbstractDomainObject
 
     /**
      * @param string $firstName
+     * @validate StringLength(minimum=3, maximum=30)
      */
     final public function setFirstName(string $firstName)
     {
@@ -83,6 +90,7 @@ final class User extends AbstractDomainObject
 
     /**
      * @param string $lastName
+     * @validate StringLength(minimum=3, maximum=30)
      */
     final public function setLastName(string $lastName)
     {

@@ -60,7 +60,12 @@ class UserController extends ActionController
         $this->getLogger()->debug("Called controller action " . __METHOD__);
     }
 
-    public function submitUserAction(User $feUser)
+    /**
+     * @param \AlexGunkel\FeUseradd\Domain\Model\User $feUser the fe user
+     *
+     * @return void
+     */
+    public function submitUserAction(\AlexGunkel\FeUseradd\Domain\Model\User $feUser)
     {
         $this->getLogger()->debug("Called controller action " . __METHOD__);
 
