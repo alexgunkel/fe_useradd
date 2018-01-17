@@ -164,7 +164,7 @@ class UserController extends ActionController
             $feUser->setPassword($saltedPw);
             $this->getLogger()->debug("set Password for $feUser: $passwordInput ($saltedPw)");
 
-            $this->userRepository->update($feUser);
+            $this->userRepository->moveToFeUser($feUser);
         } catch (FeUseraddException $exception) {
             $this->getLogger()->error("Error: " . $exception->getMessage() . ". Trace: " . $exception->getTraceAsString());
         }
