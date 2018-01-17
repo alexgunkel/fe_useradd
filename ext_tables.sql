@@ -14,5 +14,7 @@ CREATE TABLE tx_feuseradd_domain_model_user (
   position VARCHAR(255) NOT NULL DEFAULT '',
   password VARCHAR(255) NOT NULL DEFAULT '',
 
+  registration_state CHAR(10) NOT NULL DEFAULT '',
+
   PRIMARY KEY (uid)
 );

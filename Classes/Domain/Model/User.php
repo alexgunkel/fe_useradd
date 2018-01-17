@@ -9,6 +9,7 @@
 namespace AlexGunkel\FeUseradd\Domain\Model;
 
 
+use AlexGunkel\FeUseradd\Domain\Value\RegistrationState;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 
 final class User extends AbstractDomainObject
@@ -48,6 +49,11 @@ final class User extends AbstractDomainObject
      * @var string
      */
     protected $password;
+
+    /**
+     * @var string
+     */
+    protected $registrationState;
 
     final public function __clone()
     {
@@ -159,5 +165,15 @@ final class User extends AbstractDomainObject
     final public function setPassword(string $password)
     {
         $this->password = $password;
+    }
+
+    final public function setRegistrationState(string $registrationState)
+    {
+        $this->registrationState = $registrationState;
+    }
+
+    final public function getRegistrationState(): string
+    {
+        return $this->registrationState;
     }
 }

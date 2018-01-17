@@ -15,10 +15,15 @@ use AlexGunkel\FeUseradd\Domain\Repository\UserRepository;
 use AlexGunkel\FeUseradd\Domain\Value\Password;
 use AlexGunkel\FeUseradd\Exception\ValidationException;
 use TYPO3\CMS\Extbase\Mvc\Request;
-use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
 
 class UserService
 {
+    /**
+     * @var \AlexGunkel\FeUseradd\Service\PasswordService
+     * @inject
+     */
+    private $passwordService;
+
     public function getLoginDataFromRequest(Request $request): LoginData
     {
         $arguments = $request->getArguments();
@@ -36,8 +41,7 @@ class UserService
     public function getValidatedFeUser(UserRepository $repository, LoginData $loginData): User
     {
         $feUser = $repository->findByEmail($loginData->getEmail());
-        $salting = SaltFactory::getSaltingInstance(null, 'FE');
-        if ($salting->checkPassword($loginData->getPassword(), $feUser->getPassword())) {
+        if ($this->passwordService->validateUser($feUser, $loginData->getPassword())) {
             return $feUser;
         }
 

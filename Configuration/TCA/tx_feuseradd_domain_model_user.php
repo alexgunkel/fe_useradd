@@ -26,6 +26,7 @@ return array(
         'title' => 'FE User',
         'label' => 'last_name',
         'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
         'hideTable' => true,
         'security' => [
             'ignoreWebMountRestriction' => false,
@@ -81,8 +82,16 @@ return array(
             'label' => 'Details & Erfahrungen',
             'config' => [
                 'type' => 'text',
-                'cols' => 40,
-                'rows' => 15,
+                'size' => 20,
+                'eval' => 'trim, required',
+            ],
+        ],
+        'registration_state' => [
+            'label' => 'Status',
+            'config' => [
+                'type' => 'text',
+                'size' => 10,
+                'eval' => 'trim, required',
             ],
         ],
     ),
