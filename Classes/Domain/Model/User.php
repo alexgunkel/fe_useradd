@@ -10,6 +10,7 @@ namespace AlexGunkel\FeUseradd\Domain\Model;
 
 
 use AlexGunkel\FeUseradd\Domain\Value\RegistrationState;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 
 final class User extends AbstractDomainObject
@@ -175,5 +176,15 @@ final class User extends AbstractDomainObject
     final public function getRegistrationState(): string
     {
         return $this->registrationState;
+    }
+
+    final public function toFrontendUser(): FrontendUser
+    {
+        $clone = new FrontendUser($this->getEmail(), $this->getPassword());
+        $clone->setFirstName($this->getFirstName());
+        $clone->setLastName($this->getLastName());
+        $clone->setEmail($this->getEmail());
+
+        return $clone;
     }
 }

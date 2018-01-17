@@ -10,8 +10,9 @@ namespace AlexGunkel\FeUseradd\Domain\Repository;
 
 use AlexGunkel\FeUseradd\Domain\Model\User;
 use AlexGunkel\FeUseradd\Exception\ValidationException;
-use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
-use TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository;
+use Psr\Log\LoggerInterface;
+use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
 
@@ -24,6 +25,27 @@ class UserRepository extends Repository
      */
     private $feUserRepository;
 
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    /**
+     * UserRepository constructor.
+     * @param \TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager
+     */
+    public function __construct(\TYPO3\CMS\Extbase\Object\ObjectManagerInterface $objectManager)
+    {
+        parent::__construct($objectManager);
+        $this->logger = GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return User
+     * @throws ValidationException
+     */
     final public function findByEmail(string $email) : User
     {
         $query = $this->createQuery();
@@ -40,14 +62,15 @@ class UserRepository extends Repository
         return $result->getFirst();
     }
 
+    /**
+     * @param User $user
+     */
     final public function moveToFeUser(User $user)
     {
-        $frontendUser = new FrontendUser($user->getEmail(), $user->getPassword());
-        $frontendUser->setFirstName($user->getFirstName());
-        $frontendUser->setLastName($user->getLastName());
-        $frontendUser->setEmail($user->getEmail());
+        $this->logger->debug("Add $user to fe_users-table");
+        $this->feUserRepository->add($user->toFrontendUser());
 
-        $this->feUserRepository->add($frontendUser);
+        $this->logger->debug("Remove $user from registration-table");
         $this->remove($user);
     }
 }
