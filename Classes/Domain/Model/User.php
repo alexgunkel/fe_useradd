@@ -56,10 +56,16 @@ final class User extends AbstractDomainObject
      */
     protected $registrationState;
 
+    /**
+     * @var string
+     */
+    protected $userGroup;
+
     final public function __clone()
     {
         parent::__clone();
         $this->password = '';
+        $this->userGroup = '';
     }
 
     /**
@@ -176,6 +182,22 @@ final class User extends AbstractDomainObject
     final public function getRegistrationState(): string
     {
         return $this->registrationState;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserGroup(): string
+    {
+        return $this->userGroup;
+    }
+
+    /**
+     * @param string $userGroup
+     */
+    public function setUserGroup(string $userGroup)
+    {
+        $this->userGroup = $userGroup;
     }
 
     final public function toFrontendUser(): FrontendUser

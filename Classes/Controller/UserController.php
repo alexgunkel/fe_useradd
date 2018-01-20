@@ -17,6 +17,7 @@ use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class UserController extends ActionController
 {
@@ -87,6 +88,7 @@ class UserController extends ActionController
         );
 
         $sendTo = $this->settings['receiver'];
+
         $mail = new ValidationMail($link, $feUser);
         $this->mailService->sendMailTo($mail, $sendTo);
 
@@ -163,6 +165,10 @@ class UserController extends ActionController
             $saltedPw = $this->passwordService->getSaltedPassword($passwordInput);
             $feUser->setPassword($saltedPw);
             $this->getLogger()->debug("set Password for $feUser: $passwordInput ($saltedPw)");
+
+            $userGroup = $this->settings['fe_user_group'];
+            $feUser->setUserGroup($userGroup);
+            $this->logger->debug("Assign user-group $userGroup");
 
             $this->userRepository->moveToFeUser($feUser);
         } catch (FeUseraddException $exception) {

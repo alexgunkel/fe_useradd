@@ -17,20 +17,16 @@
                             </config>
                         </TCEforms>
                     </settings.receiver>
-                    <settings.pages>
+                    <settings.fe_user_group>
                         <TCEforms>
                             <exclude>1</exclude>
-                            <label>LLL:EXT:felogin/Resources/Private/Language/Database.xlf:tt_content.pi_flexform.user_storage</label>
+                            <label>User Group</label>
                             <config>
-                                <type>group</type>
-                                <internal_type>db</internal_type>
-                                <allowed>pages</allowed>
-                                <size>3</size>
-                                <maxitems>1</maxitems>
-                                <minitems>0</minitems>
+                                <type>select</type>
+                                <foreign_table>fe_groups</foreign_table>
                             </config>
                         </TCEforms>
-                    </settings.pages>
+                    </settings.fe_user_group>
                 </el>
             </ROOT>
         </sDEF>
