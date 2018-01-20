@@ -34,6 +34,49 @@
 				<source>label.submit</source>
 				<target>Nutzer erstellen</target>
 			</trans-unit>
+
+            <trans-unit id="setPassword.confirm">
+                <target>Ihr Passwort wurde registriert.</target>
+            </trans-unit>
+
+			<trans-unit id="submitUser.confirm">
+				<target>Ihre Daten wurden übermittelt. Sie werden von uns benachrichtigt, wenn Ihr Account freigeschaltet wurde.</target>
+			</trans-unit>
+
+            <trans-unit id="activateUser.heading">
+                <target>Passwort erstellen</target>
+            </trans-unit>
+            <trans-unit id="activateUser.password">
+                <target>Passwort:</target>
+            </trans-unit>
+            <trans-unit id="activateUser.repeatPassword">
+                <target>Passwort wiederholen:</target>
+            </trans-unit>
+            <trans-unit id="activateUser.setPassword">
+                <target>Passwort erstellen</target>
+            </trans-unit>
+
+			<trans-unit id="allowUser.heading">
+				<target>Mitglied wurde hinzugefügt.</target>
+			</trans-unit>
+			<trans-unit id="allowUser.firstName">
+				<target>Vorname:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.lastName">
+				<target>Nachname:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.email">
+				<target>E-Mail</target>
+			</trans-unit>
+			<trans-unit id="allowUser.company">
+				<target>Firma:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.position">
+				<target>Position:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.group">
+				<target>Nutzergruppe:</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
