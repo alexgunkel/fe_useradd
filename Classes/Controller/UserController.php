@@ -17,6 +17,7 @@ use AlexGunkel\FeUseradd\Exception\FeUseraddException;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 class UserController extends ActionController
@@ -39,11 +40,12 @@ class UserController extends ActionController
     private $userRepository;
 
     /**
-     * @var \AlexGunkel\FeUseradd\Service\PasswordService
+     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository
      *
      * @inject
+     *
      */
-    private $passwordService;
+    private $feUserGroupRepository;
 
     /**
      * @var \AlexGunkel\FeUseradd\Service\UserService
@@ -60,9 +62,8 @@ class UserController extends ActionController
     private $mailService;
 
     /**
-     * @param User $feUser
      */
-    public function addUserAction(User $feUser = null)
+    public function addUserAction()
     {
         $this->getLogger()->debug("Called controller action " . __METHOD__);
     }
@@ -74,6 +75,8 @@ class UserController extends ActionController
      */
     public function submitUserAction(\AlexGunkel\FeUseradd\Domain\Model\User $feUser)
     {
+        $feUser->addFeGroup($this->getStandardFeUSerGroup());
+        $this->getLogger()->debug("Add standard fe group " . $this->getStandardFeUSerGroup());
         $feUser->setRegistrationState(new RegistrationState(RegistrationState::NEW));
         $password = $this->userService->setNewRandomPassword($feUser);
         $this->userRepository->add($feUser);
@@ -163,13 +166,17 @@ class UserController extends ActionController
             $this->userService->setPassword($feUser, $password);
             $this->getLogger()->debug("set Password for $feUser: $password");
 
-            $feUser->setUserGroup($this->settings['fe_user_group']);
             $this->getLogger()->debug("Assign user-group " . $this->settings['fe_user_group']);
 
             $this->userRepository->moveToFeUser($feUser);
         } catch (FeUseraddException $exception) {
             $this->getLogger()->error("Error: " . $exception->getMessage() . ". Trace: " . $exception->getTraceAsString());
         }
+    }
+
+    private function getStandardFeUSerGroup(): FrontendUserGroup
+    {
+        return $this->feUserGroupRepository->findByIdentifier($this->settings['fe_user_group']);
     }
 
     /**

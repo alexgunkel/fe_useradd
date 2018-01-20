@@ -8,12 +8,12 @@
 
 namespace AlexGunkel\FeUseradd\Domain\Model;
 
-
-use AlexGunkel\FeUseradd\Domain\Value\RegistrationState;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
-use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
+use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
-final class User extends AbstractDomainObject
+final class User extends AbstractEntity
 {
     /**
      * @var string
@@ -57,15 +57,19 @@ final class User extends AbstractDomainObject
     protected $registrationState;
 
     /**
-     * @var string
+     * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup>
      */
-    protected $userGroup;
+    protected $feGroups;
+
+    public function __construct()
+    {
+        $this->setFeGroups(new ObjectStorage());
+    }
 
     final public function __clone()
     {
         parent::__clone();
         $this->password = '';
-        $this->userGroup = '';
     }
 
     /**
@@ -185,19 +189,24 @@ final class User extends AbstractDomainObject
     }
 
     /**
-     * @return string
+     * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup>
      */
-    public function getUserGroup(): string
+    public function getFeGroups(): ObjectStorage
     {
-        return $this->userGroup;
+        return $this->feGroups ? clone $this->feGroups : new ObjectStorage();
+    }
+
+    public function addFeGroup(FrontendUserGroup $feGroup)
+    {
+        $this->feGroups->attach($feGroup);
     }
 
     /**
-     * @param string $userGroup
+     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup> $feGroups
      */
-    public function setUserGroup(string $userGroup)
+    public function setFeGroups(ObjectStorage $feGroups)
     {
-        $this->userGroup = $userGroup;
+        $this->feGroups = $feGroups;
     }
 
     final public function toFrontendUser(): FrontendUser
@@ -206,6 +215,7 @@ final class User extends AbstractDomainObject
         $clone->setFirstName($this->getFirstName());
         $clone->setLastName($this->getLastName());
         $clone->setEmail($this->getEmail());
+        $clone->setUsergroup($this->getFeGroups());
 
         return $clone;
     }

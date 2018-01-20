@@ -94,6 +94,19 @@ return array(
                 'eval' => 'trim, required',
             ],
         ],
+        'fe_groups' => [
+            'label' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.usergroup',
+            'config' => [
+                'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
+                'foreign_table' => 'fe_groups',
+                'foreign_table_where' => 'ORDER BY fe_groups.title',
+                'enableMultiSelectFilterTextfield' => true,
+                'size' => 6,
+                'minitems' => 1,
+                'maxitems' => 50
+            ]
+        ],
     ),
     'types' => [
         '1' => ['showitem' => 'first_name, last_name, email, company, position'],

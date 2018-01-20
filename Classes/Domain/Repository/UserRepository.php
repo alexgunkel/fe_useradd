@@ -26,14 +26,6 @@ class UserRepository extends Repository
     private $feUserRepository;
 
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository
-     *
-     * @inject
-     *
-     */
-    private $feUserGroupRepository;
-
-    /**
      * @var LoggerInterface
      */
     private $logger;
@@ -76,9 +68,8 @@ class UserRepository extends Repository
     final public function moveToFeUser(User $user)
     {
         $this->logger->debug("Add $user to fe_users-table");
-        $userGroup = $this->feUserGroupRepository->findByIdentifier($user->getUserGroup());
         $typo3CoreFeUser = $user->toFrontendUser();
-        $typo3CoreFeUser->addUsergroup($userGroup);
+        $typo3CoreFeUser->addUsergroup($user->getFeGroups());
         $this->feUserRepository->add($typo3CoreFeUser);
 
 

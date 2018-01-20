@@ -13,6 +13,7 @@ CREATE TABLE tx_feuseradd_domain_model_user (
   company VARCHAR(255) NOT NULL DEFAULT '',
   position VARCHAR(255) NOT NULL DEFAULT '',
   password VARCHAR(255) NOT NULL DEFAULT '',
+  fe_groups VARCHAR(255) NOT NULL DEFAULT '',
 
   registration_state CHAR(10) NOT NULL DEFAULT '',
 

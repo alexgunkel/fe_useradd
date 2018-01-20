@@ -32,5 +32,13 @@
                     {feUser.position}
                 </td>
             </tr>
+            <tr>
+                <td>groups:</td>
+                <td>
+                    <f:for each="{feUser.feGroups}" as="group">
+                        {group.title}
+                    </f:for>
+                </td>
+            </tr>
         </table>
 </div>
