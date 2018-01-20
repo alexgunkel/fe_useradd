@@ -19,23 +19,23 @@
         </f:if>
         <div class="form-group">
             <label for="firstName">{f:translate(key: 'label.first-name', extensionName: 'fe_useradd')}</label>
-            <f:form.textfield id="firstName" property="firstName" size="30"/>
+            <f:form.textfield id="firstName" errorClass="error" property="firstName" size="30"/>
         </div>
         <div class="form-group">
             <label for="firstName">{f:translate(key: 'label.last-name', extensionName: 'fe_useradd')}</label>
-            <f:form.textfield id="lastName" property="lastName" size="30" />
+            <f:form.textfield id="lastName"  errorClass="error" property="lastName" size="30" />
         </div>
         <div class="form-group">
             <label for="email">{f:translate(key: 'label.email', extensionName: 'fe_useradd')}</label>
-            <f:form.textfield id="email" property="email" size="30" />
+            <f:form.textfield id="email" errorClass="error" property="email" size="30" />
         </div>
         <div class="form-group">
             <label for="company">{f:translate(key: 'label.company', extensionName: 'fe_useradd')}</label>
-            <f:form.textfield id="company" property="company" size="30" />
+            <f:form.textfield id="company" errorClass="error" property="company" size="30" />
         </div>
         <div class="form-group">
             <label for="position">{f:translate(key: 'label.position', extensionName: 'fe_useradd')}</label>
-            <f:form.textfield id="position" property="position" size="30" />
+            <f:form.textfield id="position" errorClass="error" property="position" size="30" />
         </div>
         <f:form.button class="btn btn-default">{f:translate(key: 'label.submit', extensionName: 'fe_useradd')}</f:form.button>
     </f:form>
