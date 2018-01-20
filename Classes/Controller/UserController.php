@@ -11,16 +11,21 @@ namespace AlexGunkel\FeUseradd\Controller;
 use AlexGunkel\FeUseradd\Domain\Model\PasswordInput;
 use AlexGunkel\FeUseradd\Domain\Model\User;
 use AlexGunkel\FeUseradd\Domain\Model\ValidationMail;
+use AlexGunkel\FeUseradd\Domain\Value\Password;
 use AlexGunkel\FeUseradd\Domain\Value\RegistrationState;
 use AlexGunkel\FeUseradd\Exception\FeUseraddException;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class UserController extends ActionController
 {
+    /**
+     * @var string
+     */
+    private const LOGGER_NAME = __CLASS__;
+
     /**
      * @var LoggerInterface
      */
@@ -70,13 +75,9 @@ class UserController extends ActionController
     public function submitUserAction(\AlexGunkel\FeUseradd\Domain\Model\User $feUser)
     {
         $feUser->setRegistrationState(new RegistrationState(RegistrationState::NEW));
-
-        $password = $this->passwordService->generateRandomPassword();
-        $saltedPw = $this->passwordService->getSaltedPassword($password, $feUser->getRegistrationState());
-        $feUser->setPassword($saltedPw);
-
+        $password = $this->userService->setNewRandomPassword($feUser);
         $this->userRepository->add($feUser);
-        $this->getLogger()->info("Added user $feUser with password $password ($saltedPw) to database.");
+        $this->getLogger()->info("Added user $feUser with password $password to database.");
 
         $link = $this->uriBuilder->setCreateAbsoluteUri(true)
             ->uriFor(
@@ -87,12 +88,12 @@ class UserController extends ActionController
             ]
         );
 
-        $sendTo = $this->settings['receiver'];
+        $this->mailService->sendMailTo(
+            new ValidationMail($link, $feUser),
+            $this->settings['receiver']
+        );
 
-        $mail = new ValidationMail($link, $feUser);
-        $this->mailService->sendMailTo($mail, $sendTo);
-
-        $this->getLogger()->debug("Generated link: $link and send it to $sendTo");
+        $this->getLogger()->debug("Generated link: $link and send it to " . $this->settings['receiver']);
     }
 
     public function allowUserAction()
@@ -105,14 +106,9 @@ class UserController extends ActionController
 
             $feUser->setRegistrationState(new RegistrationState(RegistrationState::ALLOWED));
             $this->view->assign('feUser', clone $feUser);
-            $password = $this->passwordService->generateRandomPassword();
-            $saltedPw = $this->passwordService->getSaltedPassword(
-                $password,
-                $feUser->getRegistrationState()
-            );
-            $feUser->setPassword($saltedPw);
 
-            $this->getLogger()->info("Added user $feUser with password $password ($saltedPw) to database.");
+            $password = $this->userService->setNewRandomPassword($feUser);
+            $this->getLogger()->info("Added user $feUser with password $password to database.");
 
             $link = $this->uriBuilder->setCreateAbsoluteUri(true)
                 ->uriFor(
@@ -123,10 +119,12 @@ class UserController extends ActionController
                 ]
             );
 
-            $this->getLogger()->debug("Generated link: $link and send it to " . $feUser->getEmail());
-            $mail = new ValidationMail($link, $feUser);
-            $this->mailService->sendMailTo($mail, $feUser->getEmail());
 
+            $this->mailService->sendMailTo(
+                new ValidationMail($link, $feUser),
+                $feUser->getEmail()
+            );
+            $this->getLogger()->debug("Generated link: $link and send it to " . $feUser->getEmail());
 
             $this->userRepository->update($feUser);
         } catch (FeUseraddException $exception) {
@@ -157,18 +155,16 @@ class UserController extends ActionController
     public function setPasswordAction(PasswordInput $passwordInput)
     {
         try {
-            $passwordInput->check();
+            $password = new Password((string) $passwordInput->check());
             $feUser = $this->userService->getValidatedFeUser(
                 $this->userRepository,
                 $passwordInput->getLoginData()
             );
-            $saltedPw = $this->passwordService->getSaltedPassword($passwordInput);
-            $feUser->setPassword($saltedPw);
-            $this->getLogger()->debug("set Password for $feUser: $passwordInput ($saltedPw)");
+            $this->userService->setPassword($feUser, $password);
+            $this->getLogger()->debug("set Password for $feUser: $password");
 
-            $userGroup = $this->settings['fe_user_group'];
-            $feUser->setUserGroup($userGroup);
-            $this->logger->debug("Assign user-group $userGroup");
+            $feUser->setUserGroup($this->settings['fe_user_group']);
+            $this->getLogger()->debug("Assign user-group " . $this->settings['fe_user_group']);
 
             $this->userRepository->moveToFeUser($feUser);
         } catch (FeUseraddException $exception) {
@@ -187,6 +183,6 @@ class UserController extends ActionController
 
         /** @var LogManager $logManager */
         $logManager = GeneralUtility::makeInstance(LogManager::class);
-        return $this->logger = $logManager->getLogger(__CLASS__);
+        return $this->logger = $logManager->getLogger(self::LOGGER_NAME);
     }
 }

@@ -47,4 +47,18 @@ class UserService
 
         throw new ValidationException("Password not valid");
     }
+
+    public function setPassword(User $user, Password $password)
+    {
+        $saltedPw = $this->passwordService->getSaltedPassword($passwordInput);
+        $user->setPassword($saltedPw);
+    }
+
+    public function setNewRandomPassword(User $user): Password
+    {
+        $password = $this->passwordService->generateRandomPassword();
+        $saltedPw = $this->passwordService->getSaltedPassword($password, $user->getRegistrationState());
+        $user->setPassword($saltedPw);
+        return $password;
+    }
 }
