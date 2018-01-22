@@ -12,6 +12,7 @@ use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 final class User extends AbstractEntity
 {
@@ -215,7 +216,9 @@ final class User extends AbstractEntity
         $clone->setFirstName($this->getFirstName());
         $clone->setLastName($this->getLastName());
         $clone->setEmail($this->getEmail());
-        $clone->setUsergroup($this->getFeGroups());
+        foreach ($this->getFeGroups() as $feGroup) {
+            $clone->addUsergroup($feGroup);
+        }
 
         return $clone;
     }
