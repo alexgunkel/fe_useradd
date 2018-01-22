@@ -69,7 +69,7 @@ class UserRepository extends Repository
     {
         $this->logger->debug("Add $user to fe_users-table");
         $typo3CoreFeUser = $user->toFrontendUser();
-        $typo3CoreFeUser->addUsergroup($user->getFeGroups());
+        
         $this->feUserRepository->add($typo3CoreFeUser);
 
 

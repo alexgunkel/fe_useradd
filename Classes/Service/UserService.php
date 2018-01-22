@@ -50,7 +50,7 @@ class UserService
 
     public function setPassword(User $user, Password $password)
     {
-        $saltedPw = $this->passwordService->getSaltedPassword($passwordInput);
+        $saltedPw = $this->passwordService->getSaltedPassword($password);
         $user->setPassword($saltedPw);
     }
 
