@@ -1,0 +1,5 @@
+Hey there,
+
+welcome to the Hypos network. Follow this link to chose a new password:
+
+{link -> f:format.raw()}

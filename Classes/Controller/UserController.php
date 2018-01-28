@@ -99,7 +99,7 @@ class UserController extends ActionController
         );
 
         $this->mailService->sendMailTo(
-            new ValidationMail($link, $feUser),
+            new ValidationMail($link, $feUser, ValidationMail::STATUS_VALIDATE),
             $this->settings['receiver']
         );
 
@@ -138,7 +138,7 @@ class UserController extends ActionController
 
 
             $this->mailService->sendMailTo(
-                new ValidationMail($link, $feUser),
+                new ValidationMail($link, $feUser, ValidationMail::STATUS_INFORM),
                 $feUser->getEmail()
             );
             $this->getLogger()->debug("Generated link: $link and send it to " . $feUser->getEmail());

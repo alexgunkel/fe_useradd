@@ -1,0 +1,13 @@
+Hey there,
+
+the following user wants to be added:
+
+first name: {user.firstName}
+last name: {user.lastName}
+mail address: {user.email}
+company: {user.company}
+position: {user.position}
+
+Please follow the link to activate the profile:
+
+{link -> f:format.raw()}
