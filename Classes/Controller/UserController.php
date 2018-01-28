@@ -9,7 +9,6 @@
 namespace AlexGunkel\FeUseradd\Controller;
 
 use AlexGunkel\FeUseradd\Domain\Model\PasswordInput;
-use AlexGunkel\FeUseradd\Domain\Model\User;
 use AlexGunkel\FeUseradd\Domain\Model\ValidationMail;
 use AlexGunkel\FeUseradd\Domain\Value\Password;
 use AlexGunkel\FeUseradd\Domain\Value\RegistrationState;
@@ -62,13 +61,21 @@ class UserController extends ActionController
     private $mailService;
 
     /**
+     * This action only displays an empty form. Therefore we don't have
+     * to do anything here
+     *
+     * @return void
      */
     public function addUserAction()
     {
-        $this->getLogger()->debug("Called controller action " . __METHOD__);
     }
 
     /**
+     * Basic action to submit values for a new user. The user will be created and
+     * stored to the database after we checked the uniqueness of the e-mail-address.
+     *
+     * @todo Check the existence of the e-mail-address in the fe_users-table
+     *
      * @param \AlexGunkel\FeUseradd\Domain\Model\User $feUser the fe user
      *
      * @return void
@@ -99,6 +106,13 @@ class UserController extends ActionController
         $this->getLogger()->debug("Generated link: $link and send it to " . $this->settings['receiver']);
     }
 
+    /**
+     * This action is for the first validation step. It is called when
+     * the web-site-admin follows the link in the e-mail he should have
+     * received from submitUserAction.
+     *
+     * @return void
+     */
     public function allowUserAction()
     {
         try {
@@ -135,6 +149,12 @@ class UserController extends ActionController
         }
     }
 
+    /**
+     * Here we check whether the user has a valid link and display a form to
+     * set a new password.
+     *
+     * @return void
+     */
     public function activateUserAction()
     {
         try {
@@ -151,6 +171,9 @@ class UserController extends ActionController
     }
 
     /**
+     * After filling the password form we check the password,
+     * generate its hash and move the user to the fe_users-table.
+     *
      * @param PasswordInput $passwordInput
      *
      * @return void
@@ -174,12 +197,19 @@ class UserController extends ActionController
         }
     }
 
+    /**
+     * Find the configured fe_groups-entry for this plugin
+     *
+     * @return FrontendUserGroup
+     */
     private function getStandardFeUSerGroup(): FrontendUserGroup
     {
         return $this->feUserGroupRepository->findByIdentifier($this->settings['fe_user_group']);
     }
 
     /**
+     * Find the logger, create one if it can't be found
+     *
      * @return LoggerInterface
      */
     private function getLogger() : LoggerInterface
