@@ -28,6 +28,9 @@
 			<trans-unit id="setPassword.confirm">
 				<target>Your password has been set.</target>
 			</trans-unit>
+			<trans-unit id="setPassword.infotext">
+				<target>You can login now at the member area:</target>
+			</trans-unit>
 			<trans-unit id="submitUser.confirm">
 				<target>Your data have been submitted. You will be notified by us when your account has been activated.</target>
 			</trans-unit>
@@ -65,6 +68,9 @@
 			</trans-unit>
 			<trans-unit id="allowUser.group">
 				<target>Usergroup:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.infotext">
+				<target>The user is notified to complete the registration.</target>
 			</trans-unit>
 		</body>
 	</file>

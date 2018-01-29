@@ -1,25 +1,40 @@
 <div xmlns="http://www.w3.org/1999/xhtml" lang="en"
      xmlns:f="http://typo3.org/ns/TYPO3/Fluid/ViewHelpers">
-    <h2>{f:translate(key: 'activateUser.heading', extensionName: 'fe_useradd')}</h2>
 
     <f:form action="setPassword" controller="User" object="{passwordInput}" name="passwordInput">
-        <table>
-            <tr>
-                <td>{f:translate(key: 'activateUser.password', extensionName: 'fe_useradd')}</td>
-                <td>
-                    <f:form.password property="inputOne" size="30"></f:form.password>
-                </td>
-            </tr>
-            <tr>
-                <td>{f:translate(key: 'activateUser.repeatPassword', extensionName: 'fe_useradd')}</td>
-                <td>
-                    <f:form.password property="inputTwo" size="30" ></f:form.password>
-                </td>
-            </tr>
-        </table>
+
+        <legend>{f:translate(key: 'activateUser.heading', extensionName: 'fe_useradd')}</legend>
+        <div class="form-group">
+            <label for="inputOne">{f:translate(key: 'activateUser.password', extensionName: 'fe_useradd')}</label>
+            <f:form.password id="inputOne" class="form-control" errorClass="has-error" property="inputOne" size="30"></f:form.password>
+
+            <f:form.validationResults for="passwordInput.inputOne">
+                <f:if condition="{validationResults.flattenedErrors}">
+                    <ul class="errors">
+                        <f:for each="{validationResults.errors}" as="error">
+                            <li>{error}</li>
+                        </f:for>
+                    </ul>
+                </f:if>
+            </f:form.validationResults>
+        </div>
+        <div class="form-group">
+            <label for="inputTwo">{f:translate(key: 'activateUser.password', extensionName: 'fe_useradd')}</label>
+            <f:form.password id="inputTwo" class="form-control" errorClass="has-error" property="inputTwo" size="30"></f:form.password>
+
+            <f:form.validationResults for="passwordInput.inputTwo">
+                <f:if condition="{validationResults.flattenedErrors}">
+                    <ul class="errors">
+                        <f:for each="{validationResults.errors}" as="error">
+                            <li>{error}</li>
+                        </f:for>
+                    </ul>
+                </f:if>
+            </f:form.validationResults>
+        </div>
         <f:form.hidden property="oldPassword" value="{password}" />
         <f:form.hidden property="email" value="{email}" />
 
-        <f:form.button>{f:translate(key: 'activateUser.setPassword', extensionName: 'fe_useradd')}</f:form.button>
+        <f:form.button class="btn btn-default">{f:translate(key: 'activateUser.setPassword', extensionName: 'fe_useradd')}</f:form.button>
     </f:form>
 </div>
