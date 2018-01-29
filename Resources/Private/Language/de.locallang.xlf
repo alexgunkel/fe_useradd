@@ -4,11 +4,10 @@
 		<header/>
 		<body>
 			<trans-unit id="heading">
-				<target>Überschrift</target>
+				<target>Benutzeranmelung</target>
 			</trans-unit>
 			<trans-unit id="description">
-				<source>Description</source>
-				<target>Beschreibung</target>
+				<target>Registrieren Sie sich für ihren Mitgliederzugang.</target>
 			</trans-unit>
 			<trans-unit id="label.first-name">
 				<source>label.first-name</source>
