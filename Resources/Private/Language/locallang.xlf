@@ -4,10 +4,10 @@
 		<header/>
 		<body>
 			<trans-unit id="heading">
-				<target>Heading</target>
+				<target>User Registration</target>
 			</trans-unit>
 			<trans-unit id="description">
-				<target>Description</target>
+				<target>Register for your user account.</target>
 			</trans-unit>
 			<trans-unit id="label.first-name">
 				<target>First Name</target>
