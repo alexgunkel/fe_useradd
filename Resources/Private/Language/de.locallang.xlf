@@ -4,7 +4,7 @@
 		<header/>
 		<body>
 			<trans-unit id="heading">
-				<target>Benutzeranmelung</target>
+				<target>Benutzeranmeldung</target>
 			</trans-unit>
 			<trans-unit id="description">
 				<target>Registrieren Sie sich für ihren Mitgliederzugang.</target>
