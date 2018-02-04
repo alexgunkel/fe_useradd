@@ -176,12 +176,14 @@ class UserController extends ActionController
      *
      * @param PasswordInput $passwordInput
      *
+     * @validate $passwordInput \AlexGunkel\FeUseradd\Validator\PasswordValidator
+     *
      * @return void
      */
     public function setPasswordAction(PasswordInput $passwordInput)
     {
         try {
-            $password = new Password((string) $passwordInput->check());
+            $password = new Password((string) $passwordInput);
             $feUser = $this->userService->getValidatedFeUser(
                 $this->userRepository,
                 $passwordInput->getLoginData()

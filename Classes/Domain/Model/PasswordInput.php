@@ -10,6 +10,7 @@ namespace AlexGunkel\FeUseradd\Domain\Model;
 
 
 use AlexGunkel\FeUseradd\Domain\Value\Password;
+use AlexGunkel\FeUseradd\Exception\FeUseraddException;
 
 class PasswordInput
 {
@@ -64,7 +65,7 @@ class PasswordInput
     final public function check() : self
     {
         if ($this->inputOne !== $this->inputTwo) {
-            throw new \Exception("Strings are different.");
+            throw new FeUseraddException("Strings are different.");
         }
 
         return $this;
