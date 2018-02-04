@@ -4,11 +4,10 @@
 		<header/>
 		<body>
 			<trans-unit id="heading">
-				<target>Überschrift</target>
+				<target>Benutzeranmeldung</target>
 			</trans-unit>
 			<trans-unit id="description">
-				<source>Description</source>
-				<target>Beschreibung</target>
+				<target>Registrieren Sie sich für ihren Mitgliederzugang.</target>
 			</trans-unit>
 			<trans-unit id="label.first-name">
 				<source>label.first-name</source>
@@ -41,6 +40,9 @@
 
 			<trans-unit id="submitUser.confirm">
 				<target>Ihre Daten wurden übermittelt. Sie werden von uns benachrichtigt, wenn Ihr Account freigeschaltet wurde.</target>
+			</trans-unit>
+			<trans-unit id="setPassword.infotext">
+				<target>Sie können sich nun im Mitgliederbereich anmelden:</target>
 			</trans-unit>
 
             <trans-unit id="activateUser.heading">
@@ -76,6 +78,9 @@
 			</trans-unit>
 			<trans-unit id="allowUser.group">
 				<target>Nutzergruppe:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.infotext">
+				<target>Der Nutzer wurde benachrichtigt, um die Registrierung abzuschließen.</target>
 			</trans-unit>
 		</body>
 	</file>

@@ -1,5 +1,9 @@
-Hey there,
+Willkommen im HYPOS Netzwerk,
+Ihr Nutzerkonto wurde freigeschaltet.
+Bitte klicken Sie den Link, um Ihr Passwort zu wählen:
 
-welcome to the Hypos network. Follow this link to chose a new password:
+Welcome to the Hypos network,
+your user account was activated.
+Follow the link to chose a new password:
 
 {link -> f:format.raw()}
