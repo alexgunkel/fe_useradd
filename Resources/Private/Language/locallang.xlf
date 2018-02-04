@@ -31,6 +31,9 @@
 			<trans-unit id="setPassword.infotext">
 				<target>You can login now at the member area:</target>
 			</trans-unit>
+			<trans-unit id="setPassword.stringsNotEqual">
+				<target>Strings are not equal</target>
+			</trans-unit>
 			<trans-unit id="submitUser.confirm">
 				<target>Your data have been submitted. You will be notified by us when your account has been activated.</target>
 			</trans-unit>

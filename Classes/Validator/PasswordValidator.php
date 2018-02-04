@@ -19,7 +19,13 @@ class PasswordValidator extends AbstractValidator
         try {
             $value->check();
         } catch (FeUseraddException $exception) {
-            $this->addError($exception->getMessage(), 1517779179);
+            $this->addError(
+                $this->translateErrorMessage(
+                    'setPassword.stringsNotEqual',
+                    'fe_useradd'
+                ) ?: $exception->getMessage(),
+                1517779179
+            );
         }
     }
 }

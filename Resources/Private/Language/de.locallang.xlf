@@ -44,6 +44,9 @@
 			<trans-unit id="setPassword.infotext">
 				<target>Sie können sich nun im Mitgliederbereich anmelden:</target>
 			</trans-unit>
+			<trans-unit id="setPassword.stringsNotEqual">
+				<target>Beide Eingaben nicht identisch</target>
+			</trans-unit>
 
             <trans-unit id="activateUser.heading">
                 <target>Passwort erstellen</target>
