@@ -10,26 +10,26 @@
 				<target>Register for your user account.</target>
 			</trans-unit>
 			<trans-unit id="label.first-name">
-				<target>First Name</target>
+				<target>First Name*:</target>
 			</trans-unit>
 			<trans-unit id="label.last-name">
-				<target>Last Name:</target>
+				<target>Last Name*:</target>
 			</trans-unit>
 			<trans-unit id="label.email">
-				<target>E-Mail:</target>
+				<target>E-Mail*:</target>
 			</trans-unit>
 			<trans-unit id="label.company">
-				<target>Company:</target>
+				<target>Company*:</target>
 			</trans-unit>
 			<trans-unit id="label.submit">
-				<target>Create User</target>
+				<target>Register</target>
 			</trans-unit>
 
 			<trans-unit id="setPassword.confirm">
 				<target>Your password has been set.</target>
 			</trans-unit>
 			<trans-unit id="setPassword.infotext">
-				<target>You can login now at the member area:</target>
+				<target>You can login now with your e-mail address at the member area:</target>
 			</trans-unit>
 			<trans-unit id="setPassword.stringsNotEqual">
 				<target>Strings are not equal</target>
