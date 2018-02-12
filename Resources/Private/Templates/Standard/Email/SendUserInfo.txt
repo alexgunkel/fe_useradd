@@ -1,9 +1,9 @@
-Willkommen im HYPOS Netzwerk,
+Willkommen im HYPOS-Netzwerk,
 Ihr Nutzerkonto wurde freigeschaltet.
-Bitte klicken Sie den Link, um Ihr Passwort zu wählen:
+Unter folgenden Link können Sie Ihr Passwort erstellen:
 
-Welcome to the Hypos network,
+Welcome to the HYPOS network,
 your user account was activated.
-Follow the link to chose a new password:
+Follow the link to create your own password:
 
 {link -> f:format.raw()}
