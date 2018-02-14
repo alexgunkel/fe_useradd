@@ -216,6 +216,7 @@ final class User extends AbstractEntity
         $clone->setFirstName($this->getFirstName());
         $clone->setLastName($this->getLastName());
         $clone->setEmail($this->getEmail());
+        $clone->setCompany($this->getCompany());
         foreach ($this->getFeGroups() as $feGroup) {
             $clone->addUsergroup($feGroup);
         }
