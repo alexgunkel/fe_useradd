@@ -17,6 +17,7 @@ use AlexGunkel\FeUseradd\Domain\Value\Title;
 use AlexGunkel\FeUseradd\Exception\FeUseraddException;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Log\LogManager;
+use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -78,6 +79,11 @@ class UserController extends ActionController
         );
     }
 
+    public function existingUserErrorAction()
+    {
+
+    }
+
     /**
      * Basic action to submit values for a new user. The user will be created and
      * stored to the database after we checked the uniqueness of the e-mail-address.
@@ -92,7 +98,13 @@ class UserController extends ActionController
     {
         $feUser->addFeGroup($this->getStandardFeUSerGroup());
         $this->getLogger()->debug("Add standard fe group " . $this->getStandardFeUSerGroup());
-        $password = $this->userService->prepareNewUser($this->userRepository, $feUser);
+
+        try {
+            $password = $this->userService->prepareNewUser($this->userRepository, $feUser);
+        } catch (FeUseraddException $exception) {
+            $this->getLogger()->error("Error while adding user: " . $exception->getMessage());
+            $this->redirect('existingUserError');
+        }
 
         $link = $this->uriBuilder->setCreateAbsoluteUri(true)
             ->uriFor(
