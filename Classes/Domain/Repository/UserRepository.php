@@ -62,6 +62,23 @@ class UserRepository extends Repository
         return $result->getFirst();
     }
 
+    final public function checkExistence(User $feUser): bool
+    {
+        $query = $this->createQuery();
+        $query->matching($query->equals('email', $feUser->getEmail(), false));
+        if ($query->execute(false)->count() !== 0) {
+            return true;
+        }
+
+        $query = $this->feUserRepository->createQuery();
+        $query->matching($query->equals('username', $feUser->getEmail(), false));
+        if ($query->execute(false)->count() !== 0) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * @param User $user
      */

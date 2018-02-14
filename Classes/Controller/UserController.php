@@ -92,10 +92,7 @@ class UserController extends ActionController
     {
         $feUser->addFeGroup($this->getStandardFeUSerGroup());
         $this->getLogger()->debug("Add standard fe group " . $this->getStandardFeUSerGroup());
-        $feUser->setRegistrationState(new RegistrationState(RegistrationState::NEW));
-        $password = $this->userService->setNewRandomPassword($feUser);
-        $this->userRepository->add($feUser);
-        $this->getLogger()->info("Added user $feUser with password $password to database.");
+        $password = $this->userService->prepareNewUser($this->userRepository, $feUser);
 
         $link = $this->uriBuilder->setCreateAbsoluteUri(true)
             ->uriFor(
