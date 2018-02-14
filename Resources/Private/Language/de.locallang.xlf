@@ -9,6 +9,12 @@
 			<trans-unit id="description">
 				<target>Registrieren Sie sich für Ihren Mitgliederzugang.</target>
 			</trans-unit>
+			<trans-unit id="label.title">
+				<target>Titel:</target>
+			</trans-unit>
+			<trans-unit id="label.gender">
+				<target>Anrede:</target>
+			</trans-unit>
 			<trans-unit id="label.first-name">
 				<source>label.first-name</source>
 				<target>Vorname*:</target>

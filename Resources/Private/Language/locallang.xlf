@@ -9,6 +9,12 @@
 			<trans-unit id="description">
 				<target>Register for your user account.</target>
 			</trans-unit>
+			<trans-unit id="label.title">
+				<target>Title:</target>
+			</trans-unit>
+			<trans-unit id="label.gender">
+				<target>Salutation:</target>
+			</trans-unit>
 			<trans-unit id="label.first-name">
 				<target>First Name*:</target>
 			</trans-unit>
