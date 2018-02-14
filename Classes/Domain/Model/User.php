@@ -37,6 +37,7 @@ final class User extends AbstractEntity
 
     /**
      * @var string
+     * @validate NotEmpty
      * @validate StringLength(minimum=3, maximum=30)
      */
     protected $company;
@@ -56,6 +57,16 @@ final class User extends AbstractEntity
      * @var string
      */
     protected $registrationState;
+
+    /**
+     * @var string
+     */
+    protected $gender;
+
+    /**
+     * @var string
+     */
+    protected $title;
 
     /**
      * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup>
@@ -92,6 +103,7 @@ final class User extends AbstractEntity
     /**
      * @param string $firstName
      * @validate StringLength(minimum=3, maximum=30)
+     * @validate NotEmpty
      */
     final public function setFirstName(string $firstName)
     {
@@ -109,6 +121,7 @@ final class User extends AbstractEntity
     /**
      * @param string $lastName
      * @validate StringLength(minimum=3, maximum=30)
+     * @validate NotEmpty
      */
     final public function setLastName(string $lastName)
     {
@@ -125,6 +138,8 @@ final class User extends AbstractEntity
 
     /**
      * @param string $email
+     * @validate EmailAddress
+     * @validate NotEmpty
      */
     final public function setEmail(string $email)
     {
@@ -141,6 +156,8 @@ final class User extends AbstractEntity
 
     /**
      * @param string $company
+     * @validate StringLength(minimum=3, maximum=30)
+     * @validate NotEmpty
      */
     final public function setCompany(string $company)
     {
@@ -210,6 +227,38 @@ final class User extends AbstractEntity
         $this->feGroups = $feGroups;
     }
 
+    /**
+     * @return string
+     */
+    public function getGender(): string
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string $gender
+     */
+    public function setGender(string $gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     */
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+    }
+
     final public function toFrontendUser(): FrontendUser
     {
         $clone = new FrontendUser($this->getEmail(), $this->getPassword());
@@ -217,6 +266,7 @@ final class User extends AbstractEntity
         $clone->setLastName($this->getLastName());
         $clone->setEmail($this->getEmail());
         $clone->setCompany($this->getCompany());
+        $clone->setTitle($this->getTitle());
         foreach ($this->getFeGroups() as $feGroup) {
             $clone->addUsergroup($feGroup);
         }

@@ -94,6 +94,22 @@ return array(
                 'eval' => 'trim, required',
             ],
         ],
+        'gender' => [
+            'label' => 'Status',
+            'config' => [
+                'type' => 'text',
+                'size' => 10,
+                'eval' => 'trim',
+            ],
+        ],
+        'title' => [
+            'label' => 'Status',
+            'config' => [
+                'type' => 'text',
+                'size' => 10,
+                'eval' => 'trim',
+            ],
+        ],
         'fe_groups' => [
             'label' => 'LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:fe_users.usergroup',
             'config' => [

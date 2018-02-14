@@ -16,6 +16,8 @@ CREATE TABLE tx_feuseradd_domain_model_user (
   fe_groups VARCHAR(255) NOT NULL DEFAULT '',
 
   registration_state CHAR(10) NOT NULL DEFAULT '',
+  gender CHAR(10) NOT NULL DEFAULT '',
+  title CHAR(10) NOT NULL DEFAULT '',
 
   PRIMARY KEY (uid)
 );
