@@ -47,8 +47,15 @@
 			<trans-unit id="submitUser.confirm">
 				<target>Ihre Daten wurden übermittelt. Sie werden von uns benachrichtigt, wenn Ihr Account freigeschaltet wurde.</target>
 			</trans-unit>
+            <trans-unit id="submitUser.errorUserExists">
+                <target>Diese E-Mail kann nicht verwendet werden.</target>
+            </trans-unit>
+
 			<trans-unit id="setPassword.infotext">
 				<target>Sie können sich nun mit Ihrer E-Mail-Adresse im Mitgliederbereich anmelden:</target>
+			</trans-unit>
+			<trans-unit id="setPassword.membersArea">
+				<target>Mitgliederbereich</target>
 			</trans-unit>
 			<trans-unit id="setPassword.stringsNotEqual">
 				<target>Beide Eingaben nicht identisch</target>

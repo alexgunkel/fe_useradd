@@ -37,13 +37,18 @@
 			<trans-unit id="setPassword.infotext">
 				<target>You can login now with your e-mail address at the member area:</target>
 			</trans-unit>
+			<trans-unit id="setPassword.membersArea">
+				<target>Members area</target>
+			</trans-unit>
 			<trans-unit id="setPassword.stringsNotEqual">
 				<target>Strings are not equal</target>
 			</trans-unit>
 			<trans-unit id="submitUser.confirm">
 				<target>Your data have been submitted. You will be notified by us when your account has been activated.</target>
 			</trans-unit>
-
+			<trans-unit id="submitUser.errorUserExists">
+				<target>This E-Mail is not allowed.</target>
+			</trans-unit>
 			<trans-unit id="activateUser.heading">
 				<target>Set password</target>
 			</trans-unit>
