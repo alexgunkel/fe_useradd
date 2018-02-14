@@ -65,6 +65,12 @@
 			<trans-unit id="allowUser.heading">
 				<target>User was added.</target>
 			</trans-unit>
+			<trans-unit id="allowUser.gender">
+				<target>Salutation:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.title">
+				<target>Title:</target>
+			</trans-unit>
 			<trans-unit id="allowUser.firstName">
 				<target>First Name:</target>
 			</trans-unit>

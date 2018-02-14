@@ -58,7 +58,7 @@
 				<target>Mitgliederbereich</target>
 			</trans-unit>
 			<trans-unit id="setPassword.stringsNotEqual">
-				<target>Beide Eingaben nicht identisch</target>
+				<target>Eingaben sind nicht identisch</target>
 			</trans-unit>
 
             <trans-unit id="activateUser.heading">
@@ -76,6 +76,12 @@
 
 			<trans-unit id="allowUser.heading">
 				<target>Mitglied wurde hinzugefügt.</target>
+			</trans-unit>
+			<trans-unit id="allowUser.gender">
+				<target>Anrede:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.title">
+				<target>Titel:</target>
 			</trans-unit>
 			<trans-unit id="allowUser.firstName">
 				<target>Vorname:</target>
