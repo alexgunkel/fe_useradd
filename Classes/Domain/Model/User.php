@@ -8,6 +8,7 @@
 
 namespace AlexGunkel\FeUseradd\Domain\Model;
 
+use AlexGunkel\FeUseradd\Domain\Value\Gender;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUser;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
@@ -102,8 +103,6 @@ final class User extends AbstractEntity
 
     /**
      * @param string $firstName
-     * @validate StringLength(minimum=3, maximum=30)
-     * @validate NotEmpty
      */
     final public function setFirstName(string $firstName)
     {
@@ -120,8 +119,6 @@ final class User extends AbstractEntity
 
     /**
      * @param string $lastName
-     * @validate StringLength(minimum=3, maximum=30)
-     * @validate NotEmpty
      */
     final public function setLastName(string $lastName)
     {
@@ -138,8 +135,6 @@ final class User extends AbstractEntity
 
     /**
      * @param string $email
-     * @validate EmailAddress
-     * @validate NotEmpty
      */
     final public function setEmail(string $email)
     {
@@ -156,8 +151,6 @@ final class User extends AbstractEntity
 
     /**
      * @param string $company
-     * @validate StringLength(minimum=3, maximum=30)
-     * @validate NotEmpty
      */
     final public function setCompany(string $company)
     {
@@ -241,6 +234,11 @@ final class User extends AbstractEntity
     public function setGender(string $gender)
     {
         $this->gender = $gender;
+    }
+
+    public function getGenderOptions(): array
+    {
+        return Gender::OPTIONS;
     }
 
     /**

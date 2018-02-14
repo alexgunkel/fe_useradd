@@ -13,14 +13,23 @@ use AlexGunkel\FeUseradd\Exception\LogicException;
 
 class Title
 {
-    public const DOCTOR = 'Dr.';
-    public const PROFESSOR = 'Prof. Dr.';
-    public const OPTIONS = [self::DOCTOR, self::PROFESSOR];
+    private const NONE = '';
+    private const DOCTOR = 'Dr.';
+    private const PROFESSOR = 'Prof. Dr.';
+    private const OPTIONS = [
+        self::NONE,
+        self::DOCTOR,
+        self::PROFESSOR,
+    ];
+
+    /**
+     * @var string
+     */
     private $title;
 
     public function __construct(string $title)
     {
-        if (!in_array($this, self::OPTIONS)) {
+        if (!in_array($this, array_flip(self::OPTIONS))) {
             throw new LogicException(
                 "$title must be one of the allowed values: "
                 . implode(', ', self::OPTIONS),
@@ -29,6 +38,11 @@ class Title
         }
 
         $this->title = $title;
+    }
+
+    public static function getOptions(): array
+    {
+        return array_combine(self::OPTIONS, self::OPTIONS);
     }
 
     public function __toString(): string

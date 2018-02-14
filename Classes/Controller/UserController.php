@@ -10,8 +10,10 @@ namespace AlexGunkel\FeUseradd\Controller;
 
 use AlexGunkel\FeUseradd\Domain\Model\PasswordInput;
 use AlexGunkel\FeUseradd\Domain\Model\ValidationMail;
+use AlexGunkel\FeUseradd\Domain\Value\Gender;
 use AlexGunkel\FeUseradd\Domain\Value\Password;
 use AlexGunkel\FeUseradd\Domain\Value\RegistrationState;
+use AlexGunkel\FeUseradd\Domain\Value\Title;
 use AlexGunkel\FeUseradd\Exception\FeUseraddException;
 use Psr\Log\LoggerInterface;
 use TYPO3\CMS\Core\Log\LogManager;
@@ -68,6 +70,12 @@ class UserController extends ActionController
      */
     public function addUserAction()
     {
+        $this->view->assignMultiple(
+            [
+                'genderOptions' => Gender::getOptions(),
+                'titleOptions'  => Title::getOptions(),
+            ]
+        );
     }
 
     /**

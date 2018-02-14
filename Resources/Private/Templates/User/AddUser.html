@@ -44,6 +44,32 @@
         <f:if condition="{f:translate(key: 'description', extensionName: 'fe_useradd')}">
             <legend>{f:translate(key: 'description', extensionName: 'fe_useradd')}</legend>
         </f:if>
+        <div class="form-group {error-title}">
+            <label for="title">{f:translate(key: 'label.title', extensionName: 'fe_useradd')}</label>
+            <f:form.select id="title" class="form-control" errorClass="has-error" property="title"  options="{titleOptions}"/>
+            <f:form.validationResults for="feUser.title">
+                <f:if condition="{validationResults.flattenedErrors}">
+                    <ul class="errors">
+                        <f:for each="{validationResults.errors}" as="error">
+                            <li>{error}</li>
+                        </f:for>
+                    </ul>
+                </f:if>
+            </f:form.validationResults>
+        </div>
+        <div class="form-group {error-gender}">
+            <label for="gender">{f:translate(key: 'label.gender', extensionName: 'fe_useradd')}</label>
+            <f:form.select id="gender" class="form-control" errorClass="has-error" property="gender"  options="{genderOptions}"/>
+            <f:form.validationResults for="feUser.gender">
+                <f:if condition="{validationResults.flattenedErrors}">
+                    <ul class="errors">
+                        <f:for each="{validationResults.errors}" as="error">
+                            <li>{error}</li>
+                        </f:for>
+                    </ul>
+                </f:if>
+            </f:form.validationResults>
+        </div>
         <div class="form-group {error-firstName}">
             <label for="firstName">{f:translate(key: 'label.first-name', extensionName: 'fe_useradd')}</label>
             <f:form.textfield id="firstName" class="form-control" errorClass="has-error" property="firstName" size="30"/>

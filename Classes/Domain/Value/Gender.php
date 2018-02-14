@@ -13,9 +13,9 @@ use AlexGunkel\FeUseradd\Exception\LogicException;
 
 class Gender
 {
-    public const MALE = 'Herr';
-    public const FEMALE = 'Frau';
-    public const OPTIONS = [self::MALE, self::FEMALE];
+    private const MALE = 'm';
+    private const FEMALE = 'w';
+    private const OPTIONS = [self::MALE, self::FEMALE];
 
     private $gender;
 
@@ -30,6 +30,11 @@ class Gender
         }
 
         $this->gender = $gender;
+    }
+
+    public static function getOptions(): array
+    {
+        return array_combine(self::OPTIONS, self::OPTIONS);
     }
 
     public function __toString(): string
