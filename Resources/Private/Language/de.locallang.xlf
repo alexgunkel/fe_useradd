@@ -7,23 +7,23 @@
 				<target>Benutzeranmeldung</target>
 			</trans-unit>
 			<trans-unit id="description">
-				<target>Registrieren Sie sich für ihren Mitgliederzugang.</target>
+				<target>Registrieren Sie sich für Ihren Mitgliederzugang.</target>
 			</trans-unit>
 			<trans-unit id="label.first-name">
 				<source>label.first-name</source>
-				<target>Vorname:</target>
+				<target>Vorname*:</target>
 			</trans-unit>
 			<trans-unit id="label.last-name">
 				<source>label.last-name</source>
-				<target>Nachname:</target>
+				<target>Nachname*:</target>
 			</trans-unit>
 			<trans-unit id="label.email">
 				<source>label.email</source>
-				<target>E-Mail-Adresse:</target>
+				<target>E-Mail-Adresse*:</target>
 			</trans-unit>
 			<trans-unit id="label.company">
 				<source>label.company</source>
-				<target>Firma:</target>
+				<target>Firma*:</target>
 			</trans-unit>
 			<trans-unit id="label.position">
 				<source>label.position</source>
@@ -31,7 +31,7 @@
 			</trans-unit>
 			<trans-unit id="label.submit">
 				<source>label.submit</source>
-				<target>Nutzer erstellen</target>
+				<target>Registrieren</target>
 			</trans-unit>
 
             <trans-unit id="setPassword.confirm">
@@ -42,7 +42,7 @@
 				<target>Ihre Daten wurden übermittelt. Sie werden von uns benachrichtigt, wenn Ihr Account freigeschaltet wurde.</target>
 			</trans-unit>
 			<trans-unit id="setPassword.infotext">
-				<target>Sie können sich nun im Mitgliederbereich anmelden:</target>
+				<target>Sie können sich nun mit Ihrer E-Mail-Adresse im Mitgliederbereich anmelden:</target>
 			</trans-unit>
 			<trans-unit id="setPassword.stringsNotEqual">
 				<target>Beide Eingaben nicht identisch</target>
