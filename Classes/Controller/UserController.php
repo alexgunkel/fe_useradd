@@ -67,14 +67,19 @@ class UserController extends ActionController
      * This action only displays an empty form. Therefore we don't have
      * to do anything here
      *
+     * @param \AlexGunkel\FeUseradd\Domain\Model\User $feUser
+     * @param string                                  $errorMessage
+     *
      * @return void
      */
-    public function addUserAction()
+    public function addUserAction(\AlexGunkel\FeUseradd\Domain\Model\User $feUser = null, string $errorMessage = null)
     {
         $this->view->assignMultiple(
             [
                 'genderOptions' => Gender::getOptions(),
                 'titleOptions'  => Title::getOptions(),
+                'feUser'        => $feUser,
+                'errorMessage'  => $errorMessage
             ]
         );
     }
@@ -103,7 +108,16 @@ class UserController extends ActionController
             $password = $this->userService->prepareNewUser($this->userRepository, $feUser);
         } catch (FeUseraddException $exception) {
             $this->getLogger()->error("Error while adding user: " . $exception->getMessage());
-            $this->redirect('existingUserError');
+            $feUser->setEmail('');
+            $this->forward(
+                'addUser',
+                null,
+                null,
+                [
+                    'errorMessage' => $exception->getMessage(),
+                    'feUser' => $feUser,
+                ]
+                );
         }
 
         $link = $this->uriBuilder->setCreateAbsoluteUri(true)

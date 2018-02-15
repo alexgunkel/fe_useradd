@@ -18,6 +18,10 @@
     </f:if>
     <f:form action="submitUser" controller="User" object="{feUser}" name="feUser">
 
+        <f:if condition="{errorMessage}" >
+            <p>{errorMessage}</p>
+        </f:if>
+
         <f:form.validationResults>
             <f:if condition="{validationResults.flattenedErrors}">
                 <ul class="errors">
