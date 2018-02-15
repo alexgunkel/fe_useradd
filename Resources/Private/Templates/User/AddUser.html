@@ -11,6 +11,8 @@
 -->
 
 <f:section name="Main">
+    <v:variable.set name="genderValueMr" value="{f:translate(key: 'gender.mr', extensionName: 'fe_useradd')}" />
+    <v:variable.set name="genderValueMs" value="{f:translate(key: 'gender.ms', extensionName: 'fe_useradd')}" />
     <f:if condition="{f:translate(key: 'heading', extensionName: 'fe_useradd')}">
         <h2>{f:translate(key: 'heading', extensionName: 'fe_useradd')}</h2>
     </f:if>
@@ -59,7 +61,10 @@
         </div>
         <div class="form-group {error-gender}">
             <label for="gender">{f:translate(key: 'label.gender', extensionName: 'fe_useradd')}</label>
-            <f:form.select id="gender" class="form-control" errorClass="has-error" property="gender"  options="{genderOptions}"/>
+            <f:form.select id="gender" class="form-control" errorClass="has-error"
+                           property="gender"
+                           options="{m: '{genderValueMr}',
+                                    f: '{genderValueMs}'}"/>
             <f:form.validationResults for="feUser.gender">
                 <f:if condition="{validationResults.flattenedErrors}">
                     <ul class="errors">

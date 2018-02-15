@@ -9,6 +9,12 @@
 			<trans-unit id="description">
 				<target>Registrieren Sie sich für Ihren Mitgliederzugang.</target>
 			</trans-unit>
+			<trans-unit id="label.title">
+				<target>Titel:</target>
+			</trans-unit>
+			<trans-unit id="label.gender">
+				<target>Anrede:</target>
+			</trans-unit>
 			<trans-unit id="label.first-name">
 				<source>label.first-name</source>
 				<target>Vorname*:</target>
@@ -33,6 +39,12 @@
 				<source>label.submit</source>
 				<target>Registrieren</target>
 			</trans-unit>
+			<trans-unit id="gender.mr">
+				<target>Herr</target>
+			</trans-unit>
+			<trans-unit id="gender.ms">
+				<target>Frau</target>
+			</trans-unit>
 
             <trans-unit id="setPassword.confirm">
                 <target>Ihr Passwort wurde registriert.</target>
@@ -41,11 +53,18 @@
 			<trans-unit id="submitUser.confirm">
 				<target>Ihre Daten wurden übermittelt. Sie werden von uns benachrichtigt, wenn Ihr Account freigeschaltet wurde.</target>
 			</trans-unit>
+            <trans-unit id="submitUser.errorUserExists">
+                <target>Diese E-Mail kann nicht verwendet werden.</target>
+            </trans-unit>
+
 			<trans-unit id="setPassword.infotext">
 				<target>Sie können sich nun mit Ihrer E-Mail-Adresse im Mitgliederbereich anmelden:</target>
 			</trans-unit>
+			<trans-unit id="setPassword.membersArea">
+				<target>Mitgliederbereich</target>
+			</trans-unit>
 			<trans-unit id="setPassword.stringsNotEqual">
-				<target>Beide Eingaben nicht identisch</target>
+				<target>Eingaben sind nicht identisch</target>
 			</trans-unit>
 
             <trans-unit id="activateUser.heading">
@@ -63,6 +82,12 @@
 
 			<trans-unit id="allowUser.heading">
 				<target>Mitglied wurde hinzugefügt.</target>
+			</trans-unit>
+			<trans-unit id="allowUser.gender">
+				<target>Anrede:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.title">
+				<target>Titel:</target>
 			</trans-unit>
 			<trans-unit id="allowUser.firstName">
 				<target>Vorname:</target>

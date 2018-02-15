@@ -9,6 +9,12 @@
 			<trans-unit id="description">
 				<target>Register for your user account.</target>
 			</trans-unit>
+			<trans-unit id="label.title">
+				<target>Title:</target>
+			</trans-unit>
+			<trans-unit id="label.gender">
+				<target>Salutation:</target>
+			</trans-unit>
 			<trans-unit id="label.first-name">
 				<target>First Name*:</target>
 			</trans-unit>
@@ -24,6 +30,12 @@
 			<trans-unit id="label.submit">
 				<target>Register</target>
 			</trans-unit>
+			<trans-unit id="gender.mr">
+				<target>Mr.</target>
+			</trans-unit>
+			<trans-unit id="gender.ms">
+				<target>Ms.</target>
+			</trans-unit>
 
 			<trans-unit id="setPassword.confirm">
 				<target>Your password has been set.</target>
@@ -31,13 +43,18 @@
 			<trans-unit id="setPassword.infotext">
 				<target>You can login now with your e-mail address at the member area:</target>
 			</trans-unit>
+			<trans-unit id="setPassword.membersArea">
+				<target>Members area</target>
+			</trans-unit>
 			<trans-unit id="setPassword.stringsNotEqual">
 				<target>Strings are not equal</target>
 			</trans-unit>
 			<trans-unit id="submitUser.confirm">
 				<target>Your data have been submitted. You will be notified by us when your account has been activated.</target>
 			</trans-unit>
-
+			<trans-unit id="submitUser.errorUserExists">
+				<target>This E-Mail is not allowed.</target>
+			</trans-unit>
 			<trans-unit id="activateUser.heading">
 				<target>Set password</target>
 			</trans-unit>
@@ -53,6 +70,12 @@
 
 			<trans-unit id="allowUser.heading">
 				<target>User was added.</target>
+			</trans-unit>
+			<trans-unit id="allowUser.gender">
+				<target>Salutation:</target>
+			</trans-unit>
+			<trans-unit id="allowUser.title">
+				<target>Title:</target>
 			</trans-unit>
 			<trans-unit id="allowUser.firstName">
 				<target>First Name:</target>

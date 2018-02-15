@@ -2,37 +2,49 @@
     <h2>{f:translate(key: 'allowUser.heading', extensionName: 'fe_useradd')}</h2>
         <table>
             <tr>
-                <td>{f:translate(key: 'allowUser.firstName', extensionName: 'fe_useradd')}</td>
+                <td>{f:translate(key: 'allowUser.gender', extensionName: 'fe_useradd')} </td>
+                <td>
+                    {feUser.gender}
+                </td>
+            </tr>
+            <tr>
+                <td>{f:translate(key: 'allowUser.title', extensionName: 'fe_useradd')} </td>
+                <td>
+                    {feUser.title}
+                </td>
+            </tr>
+            <tr>
+                <td>{f:translate(key: 'allowUser.firstName', extensionName: 'fe_useradd')} </td>
                 <td>
                     {feUser.firstName}
                 </td>
             </tr>
             <tr>
-                <td>{f:translate(key: 'allowUser.lastName', extensionName: 'fe_useradd')}</td>
+                <td>{f:translate(key: 'allowUser.lastName', extensionName: 'fe_useradd')} </td>
                 <td>
                     {feUser.lastName}
                 </td>
             </tr>
             <tr>
-                <td>{f:translate(key: 'allowUser.email', extensionName: 'fe_useradd')}</td>
+                <td>{f:translate(key: 'allowUser.email', extensionName: 'fe_useradd')} </td>
                 <td>
                     {feUser.email}
                 </td>
             </tr>
             <tr>
-                <td>{f:translate(key: 'allowUser.company', extensionName: 'fe_useradd')}</td>
+                <td>{f:translate(key: 'allowUser.company', extensionName: 'fe_useradd')} </td>
                 <td>
                     {feUser.company}
                 </td>
             </tr>
             <tr>
-                <td>{f:translate(key: 'allowUser.position', extensionName: 'fe_useradd')}</td>
+                <td>{f:translate(key: 'allowUser.position', extensionName: 'fe_useradd')} </td>
                 <td>
                     {feUser.position}
                 </td>
             </tr>
             <tr>
-                <td>groups:</td>
+                <td>{f:translate(key: 'allowUser.group', extensionName: 'fe_useradd')} </td>
                 <td>
                     <f:for each="{feUser.feGroups}" as="group">
                         {group.title}
