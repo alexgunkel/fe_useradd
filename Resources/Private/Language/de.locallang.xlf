@@ -73,6 +73,9 @@
             <trans-unit id="activateUser.password">
                 <target>Passwort:</target>
             </trans-unit>
+			<trans-unit id="activateUser.password.info">
+				<target>(5-20 Zeichen)</target>
+			</trans-unit>
             <trans-unit id="activateUser.repeatPassword">
                 <target>Passwort wiederholen:</target>
             </trans-unit>
