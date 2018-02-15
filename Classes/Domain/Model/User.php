@@ -236,11 +236,6 @@ final class User extends AbstractEntity
         $this->gender = $gender;
     }
 
-    public function getGenderOptions(): array
-    {
-        return Gender::OPTIONS;
-    }
-
     /**
      * @return string
      */
