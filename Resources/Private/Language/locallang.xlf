@@ -30,6 +30,12 @@
 			<trans-unit id="label.submit">
 				<target>Register</target>
 			</trans-unit>
+			<trans-unit id="gender.mr">
+				<target>Mr.</target>
+			</trans-unit>
+			<trans-unit id="gender.ms">
+				<target>Ms.</target>
+			</trans-unit>
 
 			<trans-unit id="setPassword.confirm">
 				<target>Your password has been set.</target>

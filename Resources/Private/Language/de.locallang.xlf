@@ -39,6 +39,12 @@
 				<source>label.submit</source>
 				<target>Registrieren</target>
 			</trans-unit>
+			<trans-unit id="gender.mr">
+				<target>Herr</target>
+			</trans-unit>
+			<trans-unit id="gender.ms">
+				<target>Frau</target>
+			</trans-unit>
 
             <trans-unit id="setPassword.confirm">
                 <target>Ihr Passwort wurde registriert.</target>

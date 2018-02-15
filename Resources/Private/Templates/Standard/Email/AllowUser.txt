@@ -8,7 +8,6 @@ Last Name: {user.lastName}
 Mail Address: {user.email}
 Company: {user.company}
 Position: {user.position}
-Usergroup: {user.group}
 
 Bitte den Link klicken, um das Profil zu aktivieren:
 Please follow the link to activate the profile:
