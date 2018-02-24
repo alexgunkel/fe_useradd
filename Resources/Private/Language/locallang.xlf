@@ -53,7 +53,7 @@
 				<target>Your data have been submitted. You will be notified by us when your account has been activated.</target>
 			</trans-unit>
 			<trans-unit id="submitUser.errorUserExists">
-				<target>This E-Mail is not allowed.</target>
+				<target>This E-Mail Address is already registered. Please use another E-Mail. In case of problems please contact us under info@hypos-eastgermany.de.</target>
 			</trans-unit>
 			<trans-unit id="activateUser.heading">
 				<target>Set password</target>

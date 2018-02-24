@@ -54,7 +54,7 @@
 				<target>Ihre Daten wurden übermittelt. Sie werden von uns benachrichtigt, wenn Ihr Account freigeschaltet wurde.</target>
 			</trans-unit>
             <trans-unit id="submitUser.errorUserExists">
-                <target>Diese E-Mail kann nicht verwendet werden.</target>
+                <target>Eine Anmeldung mit dieser Mailadresse ist bereits erfolgt. Bitte melden Sie sich mit einer anderen Mailadresse an. Sollte an dieser Stelle ein Problem vorliegen, kontaktieren Sie bitte info@hypos-eastgermany.de.</target>
             </trans-unit>
 
 			<trans-unit id="setPassword.infotext">
