@@ -24,12 +24,14 @@ final class User extends AbstractEntity
     /**
      * @var string
      * @validate StringLength(minimum=3, maximum=30)
+     * @validate NotEmpty
      */
     protected $firstName;
 
     /**
      * @var string
      * @validate StringLength(minimum=3, maximum=30)
+     * @validate NotEmpty
      */
     protected $lastName;
 
