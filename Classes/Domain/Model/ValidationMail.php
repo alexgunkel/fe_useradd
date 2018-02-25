@@ -14,14 +14,36 @@ class ValidationMail
     private $validationLink;
     private $feUser;
     private $status;
+    private $subject;
     public const STATUS_VALIDATE = 1;
     public const STATUS_INFORM = 2;
+    private const SUBJECT = [
+        self::STATUS_VALIDATE => 'HYPOS-Mitgliederbereich - eine neue Anmeldung liegt vor',
+        self::STATUS_INFORM => 'HYPOS-Mitgliederbereich - Ihre Anmeldung',
+    ];
 
     public function __construct(string $validationLink, User $user, int $status = 1)
     {
         $this->validationLink = $validationLink;
         $this->feUser = $user;
         $this->status = $status;
+        $this->subject = self::SUBJECT[$status];
+    }
+
+    /**
+     * @return string
+     */
+    public function getSubject(): string
+    {
+        return $this->subject;
+    }
+
+    /**
+     * @param string $subject
+     */
+    public function setSubject(string $subject)
+    {
+        $this->subject = $subject;
     }
 
     /**

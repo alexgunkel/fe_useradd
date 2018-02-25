@@ -50,6 +50,7 @@ class MailService
     {
         /** @var MailMessage $message */
         $message = GeneralUtility::makeInstance(MailMessage::class);
+        $message->setSubject($mail->getSubject());
         $message->setTo($address);
         $message->setBody($this->renderEmailBody($mail));
 
