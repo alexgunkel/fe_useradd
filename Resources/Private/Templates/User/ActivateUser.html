@@ -4,7 +4,7 @@
     <f:form action="setPassword" controller="User" object="{passwordInput}" name="passwordInput">
         <legend>{f:translate(key: 'activateUser.heading', extensionName: 'fe_useradd')}</legend>
         <div class="form-group">
-            <label for="inputOne">{f:translate(key: 'activateUser.password', extensionName: 'fe_useradd')}</label>
+            <label for="inputOne">{f:translate(key: 'activateUser.password', extensionName: 'fe_useradd')} {f:translate(key: 'activateUser.password.info', extensionName: 'fe_useradd')}</label>
             <f:form.password id="inputOne" class="form-control" errorClass="has-error" property="inputOne" size="30"></f:form.password>
         </div>
         <div class="form-group">
