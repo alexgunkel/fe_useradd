@@ -283,6 +283,7 @@ final class User extends AbstractEntity
         $clone->setEmail($this->getEmail());
         $clone->setCompany($this->getCompany());
         $clone->setTitle($this->getTitle());
+        DebuggerUtility::var_dump($this);
         $clone->setGender(($this->getGender() === Gender::FEMALE) ? 1 : 0);
         foreach ($this->getFeGroups() as $feGroup) {
             $clone->addUsergroup($feGroup);
