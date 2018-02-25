@@ -15,11 +15,12 @@ use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class UserRepository extends Repository
 {
     /**
-     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserRepository
+     * @var \In2code\Femanager\Domain\Repository\UserRepository
      *
      * @inject
      */
@@ -86,6 +87,7 @@ class UserRepository extends Repository
     {
         $this->logger->debug("Add $user to fe_users-table");
         $typo3CoreFeUser = $user->toFrontendUser();
+        DebuggerUtility::var_dump($typo3CoreFeUser);
 
         $this->feUserRepository->add($typo3CoreFeUser);
 

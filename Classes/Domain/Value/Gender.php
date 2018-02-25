@@ -13,8 +13,8 @@ use AlexGunkel\FeUseradd\Exception\LogicException;
 
 class Gender
 {
-    private const MALE = 'm';
-    private const FEMALE = 'w';
+    public const MALE = 'm';
+    public const FEMALE = 'w';
     private const OPTIONS = [self::MALE, self::FEMALE];
 
     private $gender;

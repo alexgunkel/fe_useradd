@@ -15,6 +15,10 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
+/**
+ * Class User
+ * @package AlexGunkel\FeUseradd\Domain\Model
+ */
 final class User extends AbstractEntity
 {
     /**
@@ -74,11 +78,17 @@ final class User extends AbstractEntity
      */
     protected $feGroups;
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->setFeGroups(new ObjectStorage());
     }
 
+    /**
+     *
+     */
     final public function __clone()
     {
         parent::__clone();
@@ -189,11 +199,17 @@ final class User extends AbstractEntity
         $this->password = $password;
     }
 
+    /**
+     * @param string $registrationState
+     */
     final public function setRegistrationState(string $registrationState)
     {
         $this->registrationState = $registrationState;
     }
 
+    /**
+     * @return string
+     */
     final public function getRegistrationState(): string
     {
         return $this->registrationState;
@@ -207,6 +223,9 @@ final class User extends AbstractEntity
         return $this->feGroups ? clone $this->feGroups : new ObjectStorage();
     }
 
+    /**
+     * @param FrontendUserGroup $feGroup
+     */
     public function addFeGroup(FrontendUserGroup $feGroup)
     {
         $this->feGroups->attach($feGroup);
@@ -252,14 +271,19 @@ final class User extends AbstractEntity
         $this->title = $title;
     }
 
+    /**
+     * @return FrontendUser
+     */
     final public function toFrontendUser(): FrontendUser
     {
-        $clone = new FrontendUser($this->getEmail(), $this->getPassword());
+        $clone = new \In2code\Femanager\Domain\Model\User();
+        $clone->setUsername($this->getEmail());
         $clone->setFirstName($this->getFirstName());
         $clone->setLastName($this->getLastName());
         $clone->setEmail($this->getEmail());
         $clone->setCompany($this->getCompany());
         $clone->setTitle($this->getTitle());
+        $clone->setGender(($this->getGender() === Gender::FEMALE) ? 1 : 0);
         foreach ($this->getFeGroups() as $feGroup) {
             $clone->addUsergroup($feGroup);
         }
