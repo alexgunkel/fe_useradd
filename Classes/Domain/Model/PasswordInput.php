@@ -27,12 +27,14 @@ class PasswordInput
     /**
      * @var string
      * @validate StringLength(minimum=5, maximum=20)
+     * @validate NotEmpty
      */
     protected $inputOne = '';
 
     /**
      * @var string
      * @validate StringLength(minimum=5, maximum=20)
+     * @validate NotEmpty
      */
     protected $inputTwo = '';
 

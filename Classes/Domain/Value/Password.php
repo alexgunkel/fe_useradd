@@ -9,14 +9,29 @@
 namespace AlexGunkel\FeUseradd\Domain\Value;
 
 
+/**
+ * Class Password
+ * @package AlexGunkel\FeUseradd\Domain\Value
+ */
 final class Password
 {
+    /**
+     * @var string
+     */
     private $password;
+
+    /**
+     * Password constructor.
+     * @param string $password
+     */
     public function __construct(string $password)
     {
         $this->password = $password;
     }
 
+    /**
+     * @return string
+     */
     public function __toString(): string
     {
         return $this->password;
