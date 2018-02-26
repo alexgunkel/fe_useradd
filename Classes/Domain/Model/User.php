@@ -280,6 +280,7 @@ final class User extends AbstractEntity
     {
         $clone = new \In2code\Femanager\Domain\Model\User();
         $clone->setUsername($this->getEmail());
+        $clone->setPassword($this->getPassword());
         $clone->setFirstName($this->getFirstName());
         $clone->setLastName($this->getLastName());
         $clone->setEmail($this->getEmail());
