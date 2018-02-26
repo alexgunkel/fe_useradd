@@ -21,6 +21,8 @@ use TYPO3\CMS\Core\Messaging\FlashMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility;
 
 class UserController extends ActionController
 {
@@ -131,7 +133,7 @@ class UserController extends ActionController
 
         $this->mailService->sendMailTo(
             new ValidationMail($link, $feUser, ValidationMail::STATUS_VALIDATE),
-            $this->settings['receiver']
+            $this->getAdminEmail()
         );
 
         $this->getLogger()->debug("Generated link: $link and send it to " . $this->settings['receiver']);
@@ -237,7 +239,16 @@ class UserController extends ActionController
      */
     private function getStandardFeUSerGroup(): FrontendUserGroup
     {
-        return $this->feUserGroupRepository->findByIdentifier($this->settings['fe_user_group']);
+        if (isset($this->settings['fe_user_group'])) {
+            return $this->feUserGroupRepository->findByIdentifier($this->settings['fe_user_group']);
+        }
+
+        /** @var ConfigurationUtility $backendConfiguration */
+        $backendConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            ConfigurationUtility::class);
+        $config = $backendConfiguration->getCurrentConfiguration('fe_useradd');
+
+        return $this->feUserGroupRepository->findByIdentifier((int) $config['defaultUserGroup']['value']);
     }
 
     /**
@@ -254,5 +265,24 @@ class UserController extends ActionController
         /** @var LogManager $logManager */
         $logManager = GeneralUtility::makeInstance(LogManager::class);
         return $this->logger = $logManager->getLogger(self::LOGGER_NAME);
+    }
+
+    /**
+     * Get the configured admin email address
+     *
+     * @return string
+     */
+    private function getAdminEmail()
+    {
+        if (isset($this->settings['receiver']) && !empty($this->settings['receiver'])) {
+            return $this->settings['receiver'];
+        }
+
+        /** @var ConfigurationUtility $backendConfiguration */
+        $backendConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+            ConfigurationUtility::class);
+        $config = $backendConfiguration->getCurrentConfiguration('fe_useradd');
+
+        return $config['defaultAdminEmail']['value'];
     }
 }

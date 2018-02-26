@@ -1,0 +1,8 @@
+  # cat=basic/enable; type=int+; label=Default user group if no other storage is configured for a plugin
+defaultUserGroup =
+
+  # cat=basic/enable; type=string; label=Default email if no other storage is configured for a plugin
+defaultAdminEmail =
+
+  # cat=basic/enable; type=int+; label=Default storage if no other storage is configured for a plugin
+defaultStorage =
