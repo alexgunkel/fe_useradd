@@ -49,7 +49,7 @@ class UserService
     public function prepareNewUser(UserRepository $userRepository, User $feUser): Password
     {
         if ($userRepository->checkExistence($feUser)) {
-            throw new FeUseraddException("User $feUser already exists");
+            throw new FeUseraddException("Eine Anmeldung mit der verwendeten Mailadresse ist bereits erfolgt. Bitte melden Sie sich mit einer anderen Mailadresse an. Sollte an dieser Stelle ein Problem vorliegen, kontaktieren Sie bitte info@hypos-eastgermany.de.");
         }
 
         $feUser->setRegistrationState(new RegistrationState(RegistrationState::NEW));
